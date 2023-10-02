@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <string> 
 #include <sstream>
+#include "NodoProducto.h"
 using namespace std;
 
 class NodoMenu { //AA
@@ -16,6 +17,7 @@ class NodoMenu { //AA
 		int nivel;	
 		NodoMenu* hDer;
 		NodoMenu* hIzq;
+		pnodoProducto dirProducto;
 		
 	public:
 		NodoMenu ();
@@ -36,6 +38,7 @@ class NodoMenu { //AA
 		int	getNivel ();
 		NodoMenu* getHDer ();
 		NodoMenu* getHIzq ();
+		pnodoProducto getdirProducto();
 		
 		//setters.
 		void setNombre (string pNombre);
@@ -43,6 +46,7 @@ class NodoMenu { //AA
 		void setHDer(NodoMenu* hijo);
 		void setHIzq(NodoMenu* hijo);
 		void setNivel(int nivel);
+		void setdirProducto(pnodoProducto prod);
 };
 
 typedef NodoMenu* pnodoMenu;

@@ -501,12 +501,8 @@ string NodoMenu::imprimir_Arbol()
 	reporte += "\n\t\t\t\t------\n\t\t\t\tMenu";
 	reporte += "\n\t\t\t\tCodPais: " + to_string(this->codPais) + " - CodCiudad: " + to_string(this->codCiudad);
 	reporte += " -CodRestaurante: "+to_string(this->codRest) + " - CodMenu: " + to_string(this->codMenu)+" - Nombre: "+this->nombre;
-	/*
-	if (this->codCanasta == 1)
-		reporte += " - [No esta en la canasta basica]";
-	else
-		reporte += " - [Esta en la canasta basica]";
-	*/
+	if (this->dirProducto != NULL)
+		reporte += this->dirProducto->imprimir_Arbol();
 	if (this->getHDer()!= NULL)
 		reporte += this->getHDer()->imprimir_Arbol();
 	return reporte;
@@ -519,7 +515,7 @@ int NodoMenu::getcodPais() {return this->codPais;}
 int NodoMenu::getcodCiudad(){return this->codCiudad;}
 string NodoMenu::getNombre(){return this->nombre;}
 int	NodoMenu::getNivel () {return this->nivel;}
-
+pnodoProducto NodoMenu::getdirProducto(){return this->dirProducto;}
 NodoMenu* NodoMenu::getHDer () {return this->hDer;}
 NodoMenu* NodoMenu::getHIzq () {return this->hIzq;}
 
@@ -530,4 +526,4 @@ void NodoMenu::setcodPais(int pcodPais) {this->codPais = pcodPais;}
 void NodoMenu::setHDer(NodoMenu* hijo) {this->hDer = hijo;}
 void NodoMenu::setHIzq(NodoMenu* hijo) {this->hIzq = hijo;}
 void NodoMenu::setNivel(int nivel) {this->nivel = nivel;}
-
+void NodoMenu::setdirProducto(pnodoProducto prod) {this->dirProducto = prod;}

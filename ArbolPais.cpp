@@ -56,8 +56,8 @@ void ArbolPais::agregar_Datos_Pais (string & pDatosLinea)
 		else
 			indiceDatos++;
 	}
-	if (!this->verificarPais ( atoi (datos[0].c_str() ) ) )
-		this->insertPais (atoi (datos[0].c_str()), datos[1]);
+	if (!this->verificarPais ( stoi (datos[0].c_str() ) ) )
+		this->insertPais (stoi (datos[0].c_str()), datos[1]);
 }
 
 void ArbolPais::leeDocPais ()
@@ -151,8 +151,8 @@ void ArbolPais::agregar_Datos_Ciudad (string & pDatosLinea)
 		else
 			indiceDatos++;
 	}
-	if (this->verificarPais ( atoi (datos[0].c_str() ) ) && !this->verificarCiudad ( atoi (datos[0].c_str() ), atoi (datos[1].c_str() ) ) )
-		this->insertCiudad (atoi (datos[0].c_str()), atoi (datos[1].c_str() ), datos[2]);
+	if (this->verificarPais ( stoi (datos[0].c_str() ) ) && !this->verificarCiudad ( stoi (datos[0].c_str() ), stoi (datos[1].c_str() ) ) )
+		this->insertCiudad (stoi (datos[0].c_str()), stoi (datos[1].c_str() ), datos[2]);
 }
 
 void ArbolPais::leerDocCiudad ()
@@ -247,8 +247,8 @@ void ArbolPais::agregar_Datos_Rest (string & pDatosLinea)
 			indiceDatos++;
 	} 
 	
-	if (this->verificarCiudad ( atoi (datos[0].c_str() ), atoi (datos[1].c_str() ) ) && !this->verificarRest ( atoi (datos[0].c_str() ), atoi (datos[1].c_str() ), atoi (datos[2].c_str() ) ) ) {
-		this->insertRest (atoi (datos[0].c_str()), atoi (datos[1].c_str() ), atoi (datos[2].c_str() ), datos[3] );
+	if (this->verificarCiudad ( stoi (datos[0].c_str() ), stoi (datos[1].c_str() ) ) && !this->verificarRest ( stoi (datos[0].c_str() ), stoi (datos[1].c_str() ), stoi (datos[2].c_str() ) ) ) {
+		this->insertRest (stoi (datos[0].c_str()), stoi (datos[1].c_str() ), stoi (datos[2].c_str() ), datos[3] );
 	}
 }
 
@@ -342,8 +342,8 @@ void ArbolPais::agregar_Datos_Menu (string & pDatosLinea)
 			indiceDatos++;
 	} 
 	
-	if (this->verificarRest ( atoi (datos[0].c_str() ), atoi (datos[1].c_str() ), atoi (datos[2].c_str() ) ) && !this->verificarMenu ( atoi (datos[0].c_str() ), atoi (datos[1].c_str() ), atoi (datos[2].c_str() ), atoi (datos[3].c_str() ) ) ) {
-		this->insertMenu (atoi (datos[0].c_str()), atoi (datos[1].c_str() ), atoi (datos[2].c_str() ), atoi (datos[3].c_str() ), datos[4] );
+	if (this->verificarRest ( stoi (datos[0].c_str() ), stoi (datos[1].c_str() ), stoi (datos[2].c_str() ) ) && !this->verificarMenu ( stoi (datos[0].c_str() ), stoi (datos[1].c_str() ), stoi (datos[2].c_str() ), stoi (datos[3].c_str() ) ) ) {
+		this->insertMenu (stoi (datos[0].c_str()), stoi (datos[1].c_str() ), stoi (datos[2].c_str() ), stoi (datos[3].c_str() ), datos[4] );
 	}
 }
 
@@ -358,6 +358,101 @@ void ArbolPais::leeDocMenu ()
 		linea = "";
     	getline (file, linea);
     	this->agregar_Datos_Menu(linea);
+	}
+	file.close();
+}
+
+//--------------------- Productos ---------------------
+
+void ArbolPais::insertProducto (int codPais, int codCiudad, int codRest, int codMenu, int codProducto, string nombre, int kcal, int precio, int cantidad)
+{
+	pnodoProducto inputAux;
+	pnodoMenu Menu_Temporal = this->buscarMenu ( codPais, codCiudad, codRest, codMenu);
+	
+	if (Menu_Temporal == NULL) 
+		return;
+	if (Menu_Temporal->getdirProducto() == NULL) {
+		Menu_Temporal->setdirProducto(new NodoProducto (codPais, codCiudad, codRest, codMenu, codProducto, nombre, kcal, precio, cantidad) ); 
+		return;
+	}
+    bool Hh = false;
+    inputAux = Menu_Temporal->getdirProducto(); 
+	Menu_Temporal->getdirProducto()->insertProducto (inputAux, Hh,codPais, codCiudad, codRest, codMenu, codProducto, nombre, kcal, precio, cantidad);
+	Menu_Temporal->setdirProducto(inputAux);
+}
+
+void ArbolPais::borrar_Producto(int codPais, int codCiudad, int codRest, int codMenu, int codProducto)
+{
+	pnodoProducto input_Aux;
+	pnodoProducto Producto;
+	pnodoMenu Menu_Temporal = this->buscarMenu ( codPais, codCiudad, codRest, codMenu);
+
+	if (Menu_Temporal != NULL) {
+		bool Hh = false;
+		if (Menu_Temporal->getdirProducto() != NULL) {
+			input_Aux = Menu_Temporal->getdirProducto();
+
+			borrarProducto_Vent(input_Aux, Hh, codProducto);
+			Menu_Temporal->setdirProducto(input_Aux);
+		}
+	}
+}
+
+pnodoProducto ArbolPais::buscarProducto (int & codPais, int & codCiudad, int & codRest, int & codMenu , int &codProducto)
+{
+	pnodoMenu Menu_Temporal = this->buscarMenu ( codPais, codCiudad, codRest, codMenu);	
+	if (Menu_Temporal == NULL) 
+		return NULL;
+	if (Menu_Temporal->getdirProducto() == NULL) 
+		return NULL;
+	return Menu_Temporal->getdirProducto()->buscarProducto (codProducto);
+}
+
+bool ArbolPais::verificarProducto(int codPais, int codCiudad, int codRest, int codMenu, int codProducto)
+{
+	pnodoProducto Producto_Temporal = this->buscarProducto ( codPais, codCiudad, codRest, codMenu,codProducto);
+	if (Producto_Temporal == NULL) 
+		return false;
+	return true;
+}
+
+string ArbolPais::imprimir_Producto (int codPais, int codCiudad, int codRest, int codMenu)
+{
+	pnodoMenu Menu_Temporal = this->buscarMenu ( codPais, codCiudad, codRest, codMenu);	
+	if (Menu_Temporal == NULL) {
+		return "\n\tMenu no registrado.";
+	}
+	if (Menu_Temporal->getdirProducto() == NULL) {
+		return "\n\tNo hay productos registrados.";
+	}
+	return Menu_Temporal->getdirProducto()->inOrdenProducto();
+}
+
+void ArbolPais::agregar_Datos_Producto (string & pDatosLinea)
+{
+	std::string datos [9] = {"", "", "","","","","","",""};
+	int indiceDatos = 0;
+	for (int indice = 0; indice < pDatosLinea.size(); indice++) {
+		if (pDatosLinea[indice] != ';')
+			datos[indiceDatos] = datos[indiceDatos] + pDatosLinea[indice];
+		else
+			indiceDatos++;
+	}
+	if (this->verificarMenu ( stoi (datos[0].c_str() ), stoi (datos[1].c_str() ),stoi (datos[2].c_str() ), stoi (datos[3].c_str() ) ) && !this->verificarProducto( stoi (datos[0].c_str() ), stoi (datos[1].c_str() ),stoi (datos[2].c_str() ),stoi (datos[3].c_str() ),stoi (datos[4].c_str() ) ) )
+		this->insertProducto (stoi (datos[0].c_str() ), stoi (datos[1].c_str() ),stoi (datos[2].c_str() ),stoi (datos[3].c_str() ),stoi (datos[4].c_str() ), datos[5],stoi (datos[6].c_str() ),stoi (datos[7].c_str() ),stoi (datos[8].c_str() ));
+}
+
+void ArbolPais::leeDocProducto ()
+{
+	string nombreArchivo = "Productos.txt";
+	ifstream file(nombreArchivo.c_str());
+    string linea;
+    
+    while(!file.eof())
+	{
+		linea = "";
+    	getline (file, linea);
+    	this->agregar_Datos_Producto(linea);
 	}
 	file.close();
 }

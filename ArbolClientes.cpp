@@ -380,8 +380,8 @@ void Adiministrador_ArbB::agregar_Datos_lectura(string& pDatosLinea)
 		else
 			indiceDatos++;
 	}
-	if (!this->esta_Administrador(atoi(datos[0].c_str())))
-		this->inserta(atoi(datos[0].c_str()), datos[1]);
+	if (!this->esta_Administrador(stoi(datos[0].c_str())))
+		this->inserta(stoi(datos[0].c_str()), datos[1]);
 }
 
 void Adiministrador_ArbB::leer_Doc()

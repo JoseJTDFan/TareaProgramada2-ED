@@ -49,6 +49,15 @@ class ArbolPais{
 		void agregar_Datos_Menu (string & pDatosLinea);
 		void leeDocMenu ();
 		
+	//		--------------------- Producto ---------------------
+		void insertProducto (int codPais, int codCiudad, int codRest, int codMenu, int codProducto, string nombre, int kcal, int precio, int cantidad);
+		void borrar_Producto(int codPais, int codCiudad, int codRest, int codMenu, int codProducto);
+		pnodoProducto buscarProducto (int & codPais, int & codCiudad, int & codRest, int & codMenu , int &codProducto);
+		bool verificarProducto     (int codPais, int codCiudad, int codRest, int codMenu, int codProducto);
+		string imprimir_Producto (int codPais, int codCiudad, int codRest, int codMenu);
+		void agregar_Datos_Producto (string & pDatosLinea);
+		void leeDocProducto ();
+		
 		string imprimir_Arbol_Ventas ();
 	
 	
