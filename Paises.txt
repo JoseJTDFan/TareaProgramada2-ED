@@ -1,0 +1,27 @@
+123;Panama
+345;Estados Unidos
+4567;Mexico
+123;Peru
+789;Canada
+234;Espana
+567;Brasil
+890;Argentina
+123;Colombia
+456;Francia
+345;Australia
+123;Chile
+4567;Alemania
+901;Italia
+234;Reino Unido
+123;India
+567;Japon
+345;Sudafrica
+123;Egipto
+890;Nigeria
+456;Rusia
+123;China
+789;Corea del Sur
+4567;Turquia
+36;Tuvalu
+51;Costa Rica
+89;Islas Marianas del Norte

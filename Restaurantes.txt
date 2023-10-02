@@ -1,0 +1,24 @@
+123;345;34;MacPanama
+345;987;456;Disney Springs
+4567;234;876;Mac
+12;34;234;MacBocas
+51;234;2341;Hola
+51;234;2342;x
+123;345;37;Gusto Tropico
+345;987;459;Gourmet Delight
+4567;234;879;Tortilla Heaven
+12;34;237;Mariscos Bocas
+51;234;2346;Sushi Sabor
+51;234;2347;Cafetería Aroma
+123;345;38;La Parrilla
+345;987;460;Cocina Magica
+4567;234;880;Burgers & Beyond
+12;34;238;Sabor Caribe
+51;234;2348;Pasta Perfecto
+51;890;2349;Pizza Planet
+123;345;39;Delicias Ticas
+345;987;461;Tropical Fusion
+4567;234;881;El Taquito
+12;34;239;Pescado Fresco
+51;234;2350;Wok Express
+51;234;2350;El Buen Comer

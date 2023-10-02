@@ -1,0 +1,59 @@
+123;345;David
+345;987;Orlando
+4567;234;Guadalajara
+123;345;Ciudad de Panama
+345;543;Miami
+4567;765;Ciudad de Mexico
+123;234;Chitre
+345;678;Tampa
+4567;876;Oaxaca
+123;789;Santiago de Veraguas
+345;432;Jacksonville
+4567;654;Monterrey
+234;123;Marsella
+567;345;Niza
+890;456;Buenos Aires
+234;567;Londres
+567;890;Tokio
+789;234;Toronto
+890;567;Sidney
+234;789;El Cairo
+567;234;Lagos
+789;890;Moscú
+123;567;David
+345;234;Orlando
+4567;789;Guadalajara
+123;567;Ciudad de Panama
+345;234;Miami
+4567;789;Ciudad de Mexico
+123;234;Chitre
+345;876;Tampa
+4567;234;Guadalajara
+123;567;Santiago de Veraguas
+345;234;Jacksonville
+4567;876;Monterrey
+234;345;Marsella
+567;234;Niza
+890;123;Buenos Aires
+234;345;Londres
+567;234;Tokio
+789;123;Toronto
+890;234;Sidney
+234;345;El Cairo
+567;123;Lagos
+789;234;Moscú
+456;123;Paris
+456;789;Lyon
+456;234;Niza
+901;567;Roma
+901;890;Milan
+901;234;Napoles
+36;567;Funafuti
+36;123;Fongafale
+36;789;Nanumea
+51;234;San Jose
+51;567;Liberia
+51;890;Puntarenas
+89;234;Saipan
+89;567;Rota
+89;123;Tinian
