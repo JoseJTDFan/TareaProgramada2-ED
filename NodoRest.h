@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <string> 
 #include <sstream>
+#include "NodoMenu.h"
 
 using namespace std;
 
@@ -16,6 +17,7 @@ class NodoRest { //ARN
 		NodoRest* padre;
 		NodoRest* hDer;
 		NodoRest* hIzq;
+		pnodoMenu dirMenu;
 	public:
 		NodoRest ();
 		NodoRest (int codPais, int codCiudad, int codRest, string nombre);
@@ -33,6 +35,7 @@ class NodoRest { //ARN
 		//void setcodRest(int codRest);
 		void setcodCiudad(int pcodCiudad);
 		void setCodigo(int pCodigo);
+		void setMenu (pnodoMenu pMenu);
 		
 		bool getRojo ();
 		int getcodPais ();
@@ -42,6 +45,7 @@ class NodoRest { //ARN
 		NodoRest * getPadre ();
 		NodoRest * getHDer ();
 		NodoRest * getHIzq ();
+		pnodoMenu getMenu ();
 		
 		string inOrden_Rest ();
 		string imprimir_Arbol ();

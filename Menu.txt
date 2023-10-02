@@ -1,0 +1,38 @@
+123;345;34;1;Entradas
+123;345;34;2;Platos Principales
+123;345;34;3;Postres
+123;345;34;4;Bebidas
+345;987;456;1;Desayuno
+345;987;456;2;Almuerzo
+345;987;456;3;Cena
+4567;234;876;1;Tacos
+4567;234;876;2;Nachos
+4567;234;876;3;Quesadillas
+12;34;234;230;Sopas
+12;34;234;231;Ensaladas
+12;34;234;232;Parrilladas
+51;234;2346;67;Sushi Rolls
+51;234;2346;68;Nigiri Sushi
+51;234;2346;901;Sashimi
+51;234;2347;901;Café
+51;234;2347;111;Tés
+51;234;2347;11;Pasteles
+123;345;38;1;Carnes a la Parrilla
+123;345;38;2;Especialidades de la Casa
+123;345;38;3;Pescados y Mariscos
+123;345;38;4;Menu Infantil
+345;987;461;1;Especiales del Chef
+345;987;461;2;Platos del Día
+345;987;461;3;Cocktails
+4567;234;881;1;Hamburguesas Clásicas
+4567;234;881;2;Especiales de la Casa
+4567;234;881;3;Acompañamientos
+12;34;239;1;Parrilladas del Mar
+12;34;239;2;Platos de la Huerta
+12;34;239;3;Especialidades del Chef
+51;234;2350;1;Sopas y Ensaladas
+51;234;2350;2;Wok de Verduras
+51;234;2350;3;Pasta Fresca
+51;890;2349;1;Pizza Clásica
+51;890;2349;2;Pizza Gourmet
+51;890;2349;3;Calzones

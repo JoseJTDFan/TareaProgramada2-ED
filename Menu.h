@@ -20,8 +20,10 @@ class Menu {
 			baseDeDatos.leeDocPais();
 			baseDeDatos.leerDocCiudad();
 			baseDeDatos.leeDocRest();
+			baseDeDatos.leeDocMenu();
 			
 			cout<< baseDeDatos.imprimir_Arbol_Ventas();
+			system("pause");
 		}
 		//Menu
 		void lecturaArchivos();

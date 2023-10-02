@@ -2,7 +2,6 @@
 
 #pragma once
 #include "NodoPais.h" 
-
 #include <fstream>
 #include <cstdlib>
 #include <string>
@@ -14,7 +13,7 @@ class ArbolPais{
 	public:
 		ArbolPais () {raiz = NULL;}
 		
-		//----------------- Paiss ---------------------
+		//----------------- Pais ---------------------
 		void insertPais (int codPais, string nombre);
 		void borrar_Pais(int codPais);
 		pnodoPais buscarPais (int & codPais);
@@ -32,14 +31,23 @@ class ArbolPais{
 		void agregar_Datos_Ciudad (string & pDatosLinea);
 		void leerDocCiudad ();
 
-//		--------------------- Marcas---------------------
+//		--------------------- Restaurante---------------------
 		void insertRest (int codPais, int codCiudad, int codRest, string nombre);
-		void borrar_Rest(int codPais, int codCiudad, int codRest);
+		void borrar_Rest (int codPais, int codCiudad, int codRest);
 		pnodoRest buscarRest (int & codPais, int & codCiudad, int & codRest);
 		bool verificarRest     (int codPais, int codCiudad, int codRest);
 		string imprimir_Rest (int codPais, int codCiudad);
 		void agregar_Datos_Rest (string & pDatosLinea);
 		void leeDocRest ();
+		
+	//		--------------------- Menu---------------------
+		void insertMenu (int codPais, int codCiudad, int codRest, int codMenu, string nombre);
+		void borrar_Menu(int codPais, int codCiudad, int codRest, int codMenu);
+		pnodoMenu buscarMenu (int & codPais, int & codCiudad, int & codRest, int & codMenu);
+		bool verificarMenu     (int codPais, int codCiudad, int codRest, int codMenu);
+		string imprimir_Menu (int codPais, int codCiudad, int codRest);
+		void agregar_Datos_Menu (string & pDatosLinea);
+		void leeDocMenu ();
 		
 		string imprimir_Arbol_Ventas ();
 	

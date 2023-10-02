@@ -473,7 +473,8 @@ string NodoRest::imprimir_Arbol()
 	reporte += "\n\t\t\t------\n\t\t\tRestaurante";
 	reporte += "\n\t\t\tCodPais: " + to_string(this->codPais) + " - CodCiudad: " + to_string(this->codCiudad);
 	reporte += " -CodRestaurante: "+to_string(this->codRest) +" - Nombre: "+this->nombre;
-	
+	if (this->dirMenu != NULL)
+		reporte += this->dirMenu->imprimir_Arbol();
 	if (this->getHDer()!= NULL)
 		reporte += this->getHDer()->imprimir_Arbol();
 	return reporte;
@@ -489,6 +490,7 @@ void NodoRest::setHIzq (NodoRest * hijoIzq) {this->hIzq = hijoIzq;}
 /*void NodoRest::setcodRest(int codRest){
 	this->codRest=codRest;
 }*/
+void NodoRest::setMenu (pnodoMenu pMenu){this->dirMenu=pMenu;}
 void NodoRest::setcodCiudad(int pcodCiudad) {this->codCiudad=pcodCiudad;}
 void NodoRest::setCodigo(int pCodigo) { this->codPais = pCodigo; }
 
@@ -497,7 +499,7 @@ int NodoRest::getcodPais () {return this->codPais;}
 int NodoRest::getcodCiudad() {return this->codCiudad;}
 int NodoRest::getcodRest(){return this->codRest;}
 string NodoRest::getnombre(){return this->nombre;}
-
+pnodoMenu NodoRest::getMenu (){return this->dirMenu;}
 NodoRest * NodoRest::getPadre () {return this->padre;}
 NodoRest * NodoRest::getHDer () {return this->hDer;}
 NodoRest * NodoRest::getHIzq () {return this->hIzq;}

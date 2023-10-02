@@ -267,6 +267,101 @@ void ArbolPais::leeDocRest ()
 	file.close();
 }
 
+//--------------------- Menus ---------------------
+
+void ArbolPais::insertMenu (int codPais, int codCiudad, int codRest, int codMenu, string nombre)
+{
+	pnodoMenu inputAux;
+	pnodoRest Rest_Temporal = this->buscarRest (codPais, codCiudad, codRest);
+	if (Rest_Temporal == NULL)
+		return;
+	if (Rest_Temporal->getMenu () == NULL) {
+		Rest_Temporal->setMenu(new NodoMenu (codPais, codCiudad, codRest, codMenu, nombre)); 
+		return;}
+    bool Hh = false;
+    inputAux = Rest_Temporal->getMenu (); 
+	Rest_Temporal->getMenu ()->insertMenu (inputAux,codPais, codCiudad, codRest, codMenu, nombre); 
+	Rest_Temporal->setMenu (inputAux);
+}
+
+void ArbolPais::borrar_Menu(int codPais, int codCiudad, int codRest, int codMenu)
+{
+	pnodoMenu inputAux;
+	pnodoRest Rest_Temporal = this->buscarRest (codPais, codCiudad, codRest);
+	if (Rest_Temporal == NULL)
+		return;
+	if (Rest_Temporal->getMenu() == NULL) {
+		return;
+	}
+	bool Hh = false;
+	inputAux = Rest_Temporal->getMenu();
+	borrar_Menu_AA(inputAux, Hh, codMenu);
+	Rest_Temporal->setMenu(inputAux);
+}
+
+
+pnodoMenu ArbolPais::buscarMenu (int & codPais, int & codCiudad, int & codRest, int & codMenu)
+{
+	pnodoRest Rest_Temporal = this->buscarRest (codPais, codCiudad, codRest);
+	if (Rest_Temporal == NULL) 
+		return NULL;
+	if (Rest_Temporal->getMenu() == NULL) 
+		return NULL;
+	return Rest_Temporal->getMenu()->buscarMenu (codMenu);
+}
+
+bool ArbolPais::verificarMenu (int codPais, int codCiudad, int codRest, int codMenu)
+{
+	pnodoMenu Menu_Temporal = this->buscarMenu (codPais,codCiudad, codRest, codMenu);
+	
+	if (Menu_Temporal == NULL) 
+		return false;
+	return true;
+}
+
+string ArbolPais::imprimir_Menu (int codPais, int codCiudad, int codRest)
+{
+	pnodoRest Rest_Temporal = this->buscarRest (codPais, codCiudad, codRest);
+	if (Rest_Temporal == NULL) {
+		return "\n\tMenu no registrado.";
+	}
+	if (Rest_Temporal->getMenu() == NULL) {
+		return "\n\tNo hay menus registrados.";
+	}
+	return Rest_Temporal->getMenu()->inOrden_Menu();
+}
+
+void ArbolPais::agregar_Datos_Menu (string & pDatosLinea)
+{
+	std::string datos [5] = {"", "", "", "",""};
+	int indiceDatos = 0;
+	for (int indice = 0; indice < pDatosLinea.size(); indice++) {
+		if (pDatosLinea[indice] != ';')
+			datos[indiceDatos] = datos[indiceDatos] + pDatosLinea[indice];
+		else
+			indiceDatos++;
+	} 
+	
+	if (this->verificarRest ( atoi (datos[0].c_str() ), atoi (datos[1].c_str() ), atoi (datos[2].c_str() ) ) && !this->verificarMenu ( atoi (datos[0].c_str() ), atoi (datos[1].c_str() ), atoi (datos[2].c_str() ), atoi (datos[3].c_str() ) ) ) {
+		this->insertMenu (atoi (datos[0].c_str()), atoi (datos[1].c_str() ), atoi (datos[2].c_str() ), atoi (datos[3].c_str() ), datos[4] );
+	}
+}
+
+void ArbolPais::leeDocMenu ()
+{
+	string nombreArchivo = "Menu.txt";
+	ifstream file(nombreArchivo.c_str());
+    string linea;
+    
+	while(!file.eof())
+	{
+		linea = "";
+    	getline (file, linea);
+    	this->agregar_Datos_Menu(linea);
+	}
+	file.close();
+}
+
 string ArbolPais::imprimir_Arbol_Ventas()
 {
 	if (this->raiz == NULL) {
