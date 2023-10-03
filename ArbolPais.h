@@ -54,11 +54,11 @@ class ArbolPais{
 		void borrar_Producto(int codPais, int codCiudad, int codRest, int codMenu, int codProducto);
 		pnodoProducto buscarProducto (int & codPais, int & codCiudad, int & codRest, int & codMenu , int &codProducto);
 		bool verificarProducto     (int codPais, int codCiudad, int codRest, int codMenu, int codProducto);
-		string imprimir_Producto (int codPais, int codCiudad, int codRest, int codMenu);
+		void imprimir_Producto (int codPais, int codCiudad, int codRest, int codMenu);
 		void agregar_Datos_Producto (string & pDatosLinea);
 		void leeDocProducto ();
 		
-		string imprimir_Arbol_Ventas ();
+		void imprimir_Arbol_Ventas ();
 	
 	
 };

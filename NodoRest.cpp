@@ -458,26 +458,26 @@ string NodoRest::inOrden_Rest ()
 	string reporte = "";
 	if (this->getHIzq() != NULL)
 		reporte += this->getHIzq()->inOrden_Rest();
-	reporte += "\n\tCodPais: "+to_Stiringeo(this->codPais)+" - CodCiudad: "+to_Stiringeo(this->codCiudad)+" - CodRestaurante: "+to_Stiringeo(this->codRest)+" - Nombre: "+this->nombre;
+	reporte += "\n\tCodRestaurante: "+to_Stiringeo(this->codRest)+" - Nombre: "+this->nombre;
 	if (this->getHDer()!= NULL)
 		reporte += this->getHDer()->inOrden_Rest();
 	return reporte;
 }
 
-string NodoRest::imprimir_Arbol()
+void NodoRest::imprimir_Arbol()
 {
-	string reporte = "";
+//	string reporte = "";
 	if (this->getHIzq() != NULL)
-		reporte += this->getHIzq()->imprimir_Arbol();
+		this->getHIzq()->imprimir_Arbol();
 		
-	reporte += "\n\t\t\t------\n\t\t\tRestaurante";
-	reporte += "\n\t\t\tCodPais: " + to_string(this->codPais) + " - CodCiudad: " + to_string(this->codCiudad);
-	reporte += " -CodRestaurante: "+to_string(this->codRest) +" - Nombre: "+this->nombre;
+	cout<< "\n\t\t\t------\n\t\t\tRestaurante\t";
+	cout<< "\n\t\t\tCodPais: " + to_string(this->codPais) + " - CodCiudad: " + to_string(this->codCiudad);
+	cout<< " -CodRestaurante: "+to_string(this->codRest) +" - Nombre: "+this->nombre;
 	if (this->dirMenu != NULL)
-		reporte += this->dirMenu->imprimir_Arbol();
+		 this->dirMenu->imprimir_Arbol();
 	if (this->getHDer()!= NULL)
-		reporte += this->getHDer()->imprimir_Arbol();
-	return reporte;
+		 this->getHDer()->imprimir_Arbol();
+	return;
 }
 
 

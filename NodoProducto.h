@@ -38,8 +38,8 @@ class NodoProducto { //AVL
 		void setprecio (int pprecio);
 		void setcantidad (int pcantidad);
 		
-		string inOrdenProducto();
-		string imprimir_Arbol ();
+		void inOrdenProducto();
+		void imprimir_Arbol ();
 		
 		int getFB();
 		NodoProducto * getHDer ();

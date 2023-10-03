@@ -48,7 +48,7 @@ class NodoRest { //ARN
 		pnodoMenu getMenu ();
 		
 		string inOrden_Rest ();
-		string imprimir_Arbol ();
+		void imprimir_Arbol ();
 		
 		
 		

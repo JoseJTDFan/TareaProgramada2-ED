@@ -470,7 +470,7 @@ string NodoMenu::inOrden_Menu()
 	string reporte = "";
 	if (this->getHIzq() != NULL)
 		reporte += this->getHIzq()->inOrden_Menu();
-	reporte += "\n\tCodPais: "+to_string(this->codPais)+" - CodCiudad: "+to_string(this->codCiudad)+" - CodRestaurante: "+to_string(this->codRest)+" - Nombre: "+this->nombre;
+	reporte += "\n\tCodMenu: "+to_string(this->codMenu)+" - Nombre: "+this->nombre;
 	if (this->getHDer()!= NULL)
 		reporte += this->getHDer()->inOrden_Menu();
 	return reporte;
@@ -492,20 +492,28 @@ bool NodoMenu::verificarMenu (bool i, int codMenu)
     }
 }
 
-string NodoMenu::imprimir_Arbol()
+void NodoMenu::imprimir_Arbol()
 {
-	string reporte = "";
+//	string reporte = "";
 	if (this->getHIzq() != NULL)
-		reporte += this->getHIzq()->imprimir_Arbol();
+		this->getHIzq()->imprimir_Arbol();
 		
-	reporte += "\n\t\t\t\t------\n\t\t\t\tMenu";
-	reporte += "\n\t\t\t\tCodPais: " + to_string(this->codPais) + " - CodCiudad: " + to_string(this->codCiudad);
-	reporte += " -CodRestaurante: "+to_string(this->codRest) + " - CodMenu: " + to_string(this->codMenu)+" - Nombre: "+this->nombre;
+	cout<< "\n\t\t\t------\n\t\t\tMenu\n";
+	cout<< "\n\t\t\tCodPais: ";
+	cout<<to_string(this->codPais);
+	cout<<" - CodCiudad: ";
+	cout<<to_string(this->codCiudad);
+	cout<< " -CodRestaurante: ";
+	cout<<to_string(this->codRest);
+	cout<<" - CodMenu: ";
+	cout<<to_string(this->codMenu);
+	cout<<" - Nombre: ";
+	cout<<this->nombre;
 	if (this->dirProducto != NULL)
-		reporte += this->dirProducto->imprimir_Arbol();
+		this->dirProducto->imprimir_Arbol();
 	if (this->getHDer()!= NULL)
-		reporte += this->getHDer()->imprimir_Arbol();
-	return reporte;
+		this->getHDer()->imprimir_Arbol();
+	return;
 }
 
 //getters.
@@ -513,6 +521,7 @@ string NodoMenu::imprimir_Arbol()
 int NodoMenu::getcodMenu () {return this->codMenu;}
 int NodoMenu::getcodPais() {return this->codPais;}
 int NodoMenu::getcodCiudad(){return this->codCiudad;}
+int NodoMenu::getcodRest(){return this->codRest;}
 string NodoMenu::getNombre(){return this->nombre;}
 int	NodoMenu::getNivel () {return this->nivel;}
 pnodoProducto NodoMenu::getdirProducto(){return this->dirProducto;}

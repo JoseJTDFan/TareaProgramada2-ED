@@ -32,7 +32,7 @@ class NodoCiudad { //AVL
 		void setCodigo(int pCodigo);
 		
 		string inOrden_Ciudad();
-		string imprimir_Arbol ();
+		void imprimir_Arbol ();
 		
 		
 		

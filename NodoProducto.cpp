@@ -317,27 +317,38 @@ void borrarProducto_Vent(NodoProducto*& pNodo, bool& pHh, int& pCodProducto)
 
 
 
-string NodoProducto::inOrdenProducto()
+void NodoProducto::inOrdenProducto()
 {
-	string reporte = "";
+//	string reporte = "";
 	if (this->getHIzq() != NULL)
-		reporte += this->getHIzq()->inOrdenProducto();
-	reporte += "\n\tCodigo: "+to_string(this->codProducto)+" - Nombre: "+this->nombre;
+		 this->getHIzq()->inOrdenProducto();
+	cout<< "\n\tCodProducto: "+to_string(this->codProducto);
+	cout<<" - Nombre: ";
+	cout<<this->nombre;
+	cout<<" - Calorias: ";
+	cout<<to_string(this->kcal);
+	cout<<" - Precio: ";
+	cout<<to_string(this->precio);
+	cout<<" - Cantidad: ";
+	cout<<to_string(this->cantidad);
 	if (this->getHDer()!= NULL)
-		reporte += this->getHDer()->inOrdenProducto();
-	return reporte;
+		this->getHDer()->inOrdenProducto();
+	return ;
 }
 
-string NodoProducto::imprimir_Arbol()
+void NodoProducto::imprimir_Arbol()
 {	
-	string reporte = "";
+//	string reporte = "";
 	if (this->getHIzq() != NULL)
-		reporte += this->getHIzq()->imprimir_Arbol();
-	reporte += "\n\n\t\t\t---------\n\t\t\tProducto\n";
-	reporte += "\n\t\t\tCodigo: "+to_string(this->codProducto) + " - Nombre: "+this->nombre;
+		 this->getHIzq()->imprimir_Arbol();
+	cout<< "\n\t\t\t---------\n\t\t\tProducto\n";
+	cout<< "\n\t\t\tCodigo: ";
+	cout<<to_string(this->codProducto);
+	cout<<" - Nombre: ";
+	cout<<this->nombre;
 	if (this->getHDer()!= NULL)
-		reporte += this->getHDer()->imprimir_Arbol();
-	return reporte;
+		this->getHDer()->imprimir_Arbol();
+	return;
 }
 
 

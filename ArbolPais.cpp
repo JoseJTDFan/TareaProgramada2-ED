@@ -416,16 +416,20 @@ bool ArbolPais::verificarProducto(int codPais, int codCiudad, int codRest, int c
 	return true;
 }
 
-string ArbolPais::imprimir_Producto (int codPais, int codCiudad, int codRest, int codMenu)
+void ArbolPais::imprimir_Producto (int codPais, int codCiudad, int codRest, int codMenu)
 {
 	pnodoMenu Menu_Temporal = this->buscarMenu ( codPais, codCiudad, codRest, codMenu);	
 	if (Menu_Temporal == NULL) {
-		return "\n\tMenu no registrado.";
+		cout<<"\n\tMenu no registrado.";
+		return;
+		 
 	}
 	if (Menu_Temporal->getdirProducto() == NULL) {
-		return "\n\tNo hay productos registrados.";
+		cout<<"\n\tNo hay productos registrados.";
+		return;
 	}
-	return Menu_Temporal->getdirProducto()->inOrdenProducto();
+	Menu_Temporal->getdirProducto()->inOrdenProducto();
+	return;
 }
 
 void ArbolPais::agregar_Datos_Producto (string & pDatosLinea)
@@ -438,6 +442,7 @@ void ArbolPais::agregar_Datos_Producto (string & pDatosLinea)
 		else
 			indiceDatos++;
 	}
+	
 	if (this->verificarMenu ( stoi (datos[0].c_str() ), stoi (datos[1].c_str() ),stoi (datos[2].c_str() ), stoi (datos[3].c_str() ) ) && !this->verificarProducto( stoi (datos[0].c_str() ), stoi (datos[1].c_str() ),stoi (datos[2].c_str() ),stoi (datos[3].c_str() ),stoi (datos[4].c_str() ) ) )
 		this->insertProducto (stoi (datos[0].c_str() ), stoi (datos[1].c_str() ),stoi (datos[2].c_str() ),stoi (datos[3].c_str() ),stoi (datos[4].c_str() ), datos[5],stoi (datos[6].c_str() ),stoi (datos[7].c_str() ),stoi (datos[8].c_str() ));
 }
@@ -457,10 +462,11 @@ void ArbolPais::leeDocProducto ()
 	file.close();
 }
 
-string ArbolPais::imprimir_Arbol_Ventas()
+void ArbolPais::imprimir_Arbol_Ventas()
 {
 	if (this->raiz == NULL) {
-		return "\n\n\tInventario vacio.";
+		cout<<"\n\n\tInventario vacio.";
+		return ;
 	}
 	return this->raiz->imprimir_Arbol();
 }

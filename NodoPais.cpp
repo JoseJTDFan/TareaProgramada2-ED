@@ -124,21 +124,21 @@ string NodoPais::inOrden_Pais()
 	return reporte;
 }
 
-string NodoPais::imprimir_Arbol()
+void NodoPais::imprimir_Arbol()
 {
-	string reporte = "";
+//	string reporte = "";
 	if (this->getHIzq() != NULL)
-		reporte += this->getHIzq()->imprimir_Arbol();
+		this->getHIzq()->imprimir_Arbol();
 
-	reporte += "\n\n\t--------\n\tPais:  ";
-	reporte += "Codigo: "+to_string(this->codPais) +" - Nombre: "+this->nombre;
-	reporte += "\n\t--------";
+	cout<< "\n\n\t--------\n\tPais:  \n";
+	cout<< "\n\nCodigo: "+to_string(this->codPais) +" - Nombre: "+this->nombre;
+	cout<< "\n\t--------";
 	if (this->dirCiudad != NULL)
-		reporte += this->dirCiudad->imprimir_Arbol();
+		this->dirCiudad->imprimir_Arbol();
 	
 	if (this->getHDer()!= NULL)
-		reporte += this->getHDer()->imprimir_Arbol();
-	return reporte;
+		this->getHDer()->imprimir_Arbol();
+	return ;
 }
 void NodoPais::setnombre (string pnombre){this->nombre = pnombre;}
 void NodoPais::setHDer (NodoPais * hijoDer) {this->hDer = hijoDer;}

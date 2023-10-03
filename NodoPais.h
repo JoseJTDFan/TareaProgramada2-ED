@@ -33,7 +33,7 @@ class NodoPais { //ABB
 		pnodoCiudad getCiudad ();
 		
 		string inOrden_Pais ();
-		string imprimir_Arbol ();
+		void imprimir_Arbol ();
 		
 		
 	friend class Nodo_Producto;

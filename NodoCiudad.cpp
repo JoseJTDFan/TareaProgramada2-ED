@@ -321,19 +321,19 @@ string NodoCiudad::inOrden_Ciudad()
 	return reporte;
 }
 
-string NodoCiudad::imprimir_Arbol()
+void NodoCiudad::imprimir_Arbol()
 {	
-	string reporte = "";
+//	string reporte = "";
 	if (this->getHIzq() != NULL)
-		reporte += this->getHIzq()->imprimir_Arbol();
-	reporte += "\n\n\t\t---------\n\t\tCiudad\n";
-	reporte += "\n\t\tCodPais: "+to_string(this->codPais) +" - CodCiudad: "+to_string(this->codCiudad)+ " - Nombre: "+this->nombre;
+		this->getHIzq()->imprimir_Arbol();
+	cout<< "\n\n\t\t---------\n\t\tCiudad\n";
+	cout<< "\n\t\tCodCiudad: "+to_string(this->codCiudad)+ " - Nombre: "+this->nombre;
 	if (this->dirRest != NULL)
-		reporte += this->dirRest->imprimir_Arbol();
+		this->dirRest->imprimir_Arbol();
 	
 	if (this->getHDer()!= NULL)
-		reporte += this->getHDer()->imprimir_Arbol();
-	return reporte;
+		this->getHDer()->imprimir_Arbol();
+	return;
 }
 
 
