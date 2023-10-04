@@ -1,6 +1,6 @@
 #include "NodoClientes.h"
 
-Pagina_Administrador::Pagina_Administrador()
+Pagina_Cliente::Pagina_Cliente()
 {
 	for (int i = 0; i < 5; i++) 
 	{
@@ -14,7 +14,7 @@ Pagina_Administrador::Pagina_Administrador()
 	this->rama5 = NULL;
 }	
 
-Pagina_Administrador::Pagina_Administrador (int pCedula, std::string pNombre)
+Pagina_Cliente::Pagina_Cliente (int pCedula, std::string pNombre)
 {
 	this->cedula[0] = pCedula;
 	this->nombre[0] = pNombre;
@@ -30,7 +30,7 @@ Pagina_Administrador::Pagina_Administrador (int pCedula, std::string pNombre)
 	this->rama5 = NULL;
 }
 
-int Pagina_Administrador::getCuentas()
+int Pagina_Cliente::getCuentas()
 {
 	int contador = 0;
 	while (contador <= 4) {
@@ -42,17 +42,17 @@ int Pagina_Administrador::getCuentas()
 	return contador;
 }
 
-int Pagina_Administrador::getCedula(int pIndice)
+int Pagina_Cliente::getCedula(int pIndice)
 {
 	return this->cedula[pIndice];
 }
 
-string Pagina_Administrador::getNombre(int pIndice)
+string Pagina_Cliente::getNombre(int pIndice)
 {
 	return this->nombre[pIndice];
 }
 
-Pagina_Administrador* Pagina_Administrador::getRama (int & pIndice)
+Pagina_Cliente* Pagina_Cliente::getRama (int & pIndice)
 {
 	switch (pIndice) 
 	{ 
@@ -69,17 +69,17 @@ Pagina_Administrador* Pagina_Administrador::getRama (int & pIndice)
 	}
 }
 
-void Pagina_Administrador::setCedula (int pIndice, int pCedula)
+void Pagina_Cliente::setCedula (int pIndice, int pCedula)
 {
 	this->cedula[pIndice] = pCedula;
 }
 
-void Pagina_Administrador::setNombre (int pIndice, string pNombre)
+void Pagina_Cliente::setNombre (int pIndice, string pNombre)
 {
 	this->nombre[pIndice] = pNombre;
 }
 
-void Pagina_Administrador::setRama (int pIndice, Pagina_Administrador * pRama)
+void Pagina_Cliente::setRama (int pIndice, Pagina_Cliente * pRama)
 {
 	switch (pIndice) 
 	{ 
@@ -101,7 +101,7 @@ void Pagina_Administrador::setRama (int pIndice, Pagina_Administrador * pRama)
 	}
 }
 
-void Pagina_Administrador::imprimir ()
+void Pagina_Cliente::imprimir ()
 { 
 	int cantidad_Datos = this->getCuentas ();
 	if (cantidad_Datos == 0) 
@@ -119,7 +119,7 @@ void Pagina_Administrador::imprimir ()
 	}
 }
 
-void Pagina_Administrador::imprimir_Pagina()
+void Pagina_Cliente::imprimir_Pagina()
 {
 	//cout<<"\nNumero de cuentas__"<<this->getCuentas ();
 	for (int i = 0; i < this->getCuentas (); i++) 
@@ -128,29 +128,29 @@ void Pagina_Administrador::imprimir_Pagina()
 	}
 }
 
-Pagina_Administrador * Pagina_Administrador::buscar (int pCedula)
+Pagina_Cliente * Pagina_Cliente::buscar (int pCedula)
 {
 	int cantidad_Datos = this->getCuentas ();
 	if (cantidad_Datos == 0) 
 		return NULL;
-	puntero_Administrador administrador_Temporal = NULL;
+	puntero_Cliente cliente_Temporal = NULL;
 	for (int i = 0; i <= cantidad_Datos; i++) {
 		
 		if (i != cantidad_Datos) {
-			if (this->getRama (i) != NULL && administrador_Temporal == NULL)
-				administrador_Temporal = this->getRama (i)->buscar(pCedula);
+			if (this->getRama (i) != NULL && cliente_Temporal == NULL)
+				cliente_Temporal = this->getRama (i)->buscar(pCedula);
 			if (this->cedula[i] == pCedula)
 				return this;
 				
 		} else {
-			if (this->getRama (i) != NULL && administrador_Temporal == NULL)
-				administrador_Temporal = this->getRama (i)->buscar(pCedula);
+			if (this->getRama (i) != NULL && cliente_Temporal == NULL)
+				cliente_Temporal = this->getRama (i)->buscar(pCedula);
 		}
 	}
-	return administrador_Temporal;
+	return cliente_Temporal;
 }
 
-int Pagina_Administrador::getIndice(int pCedula)
+int Pagina_Cliente::getIndice(int pCedula)
 {
 	int cantidad_Datos = this->getCuentas ();
 	if (cantidad_Datos == 0) 

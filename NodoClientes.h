@@ -3,34 +3,34 @@
 
 using namespace std;
 
-class Pagina_Administrador {
+class Pagina_Cliente {
 	private:
 		int cedula [5];
 		std::string nombre [5];
-		Pagina_Administrador* rama1; 
-		Pagina_Administrador* rama2; 
-		Pagina_Administrador* rama3; 
-		Pagina_Administrador* rama4; 
-		Pagina_Administrador* rama5;
+		Pagina_Cliente* rama1; 
+		Pagina_Cliente* rama2; 
+		Pagina_Cliente* rama3; 
+		Pagina_Cliente* rama4; 
+		Pagina_Cliente* rama5;
 		
 	public:
-		Pagina_Administrador ();
-		Pagina_Administrador (int pCedula, string pNombre);
+		Pagina_Cliente ();
+		Pagina_Cliente (int pCedula, string pNombre);
 		
 		int getCuentas ();
 		int getCedula (int pIndice);
 		string getNombre (int pCedula);
-		Pagina_Administrador* getRama (int & pIndice);
+		Pagina_Cliente* getRama (int & pIndice);
 		
 		void setCedula (int pIndice, int pCedula);
 		void setNombre (int pIndice, string pNombre);
-		void setRama (int pIndice, Pagina_Administrador* pRama);
+		void setRama (int pIndice, Pagina_Cliente* pRama);
 		
-		Pagina_Administrador* buscar (int pCedula);
+		Pagina_Cliente* buscar (int pCedula);
 		int getIndice (int pCedula);
 		
 		void imprimir ();
 		void imprimir_Pagina ();
 };
 
-typedef Pagina_Administrador* puntero_Administrador;
+typedef Pagina_Cliente* puntero_Cliente;

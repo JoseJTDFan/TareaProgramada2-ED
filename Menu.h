@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include "ArbolPais.h"
+#include "ArbolClientes.h"
 #include <cstdlib>
 #include <string.h>
 
@@ -22,6 +23,7 @@ class Menu {
 			baseDeDatos.leeDocRest();
 			baseDeDatos.leeDocMenu();
 			baseDeDatos.leeDocProducto();
+			clientes.leerDocCliente();
 			
 //			baseDeDatos.imprimir_Arbol_Ventas();
 //			cout<<endl<<endl;
@@ -43,7 +45,7 @@ class Menu {
 		void insertarRest();
 		void insertarMenu();
 		void insertarProducto();
-		void insertarClientes();
+		void insertarCliente();
 		
 		//Buscar
 		void buscarPais();
@@ -76,6 +78,7 @@ class Menu {
 
 	private:
 		ArbolPais baseDeDatos;
+		ArbolClientes clientes;
 //		listaClientes clientes; //lista de clientes
 //		cola colaClientes;
 };
@@ -379,6 +382,32 @@ void Menu::insertarProducto(){
 	}
 }
 
+void Menu::insertarCliente(){
+	system("cls");
+	cout<<"****************************** INSERTAR CLIENTE ******************************"<<endl;
+	cout<<endl<<"Ingrese la cedula del cliente a agregar: ";
+	
+	int cedula;
+	string nombre;
+	
+	cin>>cedula;
+	puntero_Cliente Pagina_Cliente = clientes.buscarCliente(cedula);
+	if (Pagina_Cliente==NULL){
+		cout<<endl<<"Ingrese el nombre del cliente a agregar: ";
+		cin.ignore();
+		getline(cin,nombre);
+		clientes.inserta(cedula, nombre);
+		system("cls");
+		clientes.imprimir_Arbol();
+		cout<<endl<<endl<<"Se ha insertado el cliente."<<endl;
+		system("pause");
+	}
+	else{
+		cout<<endl<<"Este codigo ya se encuentra registrado."<<endl;
+		system("pause");
+	}
+}
+
 void Menu::insertar(){
 	bool bandera=true;
 	do{
@@ -390,8 +419,8 @@ void Menu::insertar(){
 		cout<<"3. Un restaurante."<<endl;
 		cout<<"4. Un menu."<<endl;
 		cout<<"5. Un producto."<<endl;
-//		cout<<"6. Un cliente."<<endl;
-		cout<<"6. Salir."<<endl;
+		cout<<"6. Un cliente."<<endl;
+		cout<<"7. Salir."<<endl;
 		cout<<endl<<"----> ";
 		int opcion;
 	
@@ -413,10 +442,10 @@ void Menu::insertar(){
 			case 5:
 				insertarProducto();
 				break;
-//			case 6:
-//				insertarClientes();
-//				break;
 			case 6:
+				insertarCliente();
+				break;
+			case 7:
 				bandera=false;
 				break;
 			default:
@@ -741,6 +770,28 @@ void Menu::buscarProducto(){
 	}
 }
 
+void Menu::buscarClientes(){
+	
+	system("cls");
+	cout<<"****************************** BUSCAR CLIENTE ******************************"<<endl;
+	cout<<endl<<"Ingrese la cedula del cliente a buscar: ";
+	int cedula;
+	cin>>cedula;
+	
+	puntero_Cliente Pagina_Cliente = clientes.buscarCliente(cedula);
+	int indice = Pagina_Cliente->getIndice(cedula);
+	if (Pagina_Cliente!=NULL){
+		system("cls");
+		cout<<endl<<"		* La cedula del cliente es: "<< Pagina_Cliente->getCedula(indice) <<endl;
+		cout<<endl<<"		* El nombre del cliente es: "<< Pagina_Cliente->getNombre(indice) <<endl<<endl;
+		system("pause");
+	}
+	else{
+		cout<<endl<<"Este codigo no se encuentra registrado."<<endl;
+		system("pause");
+	}
+}
+
 void Menu::buscar(){
 	bool bandera=true;
 	do{
@@ -752,8 +803,8 @@ void Menu::buscar(){
 		cout<<"3. Un restaurante."<<endl;
 		cout<<"4. Un menu."<<endl;
 		cout<<"5. Un producto."<<endl;
-//		cout<<"6. Un cliente."<<endl;
-		cout<<"6. Salir."<<endl;
+		cout<<"6. Un cliente."<<endl;
+		cout<<"7. Salir."<<endl;
 		cout<<endl<<"----> ";
 		int opcion;
 	
@@ -775,10 +826,10 @@ void Menu::buscar(){
 			case 5:
 				buscarProducto();
 				break;
-//			case 6:
-//				buscarClientes();
-//				break;
 			case 6:
+				buscarClientes();
+				break;
+			case 7:
 				bandera=false;
 				break;
 			default:

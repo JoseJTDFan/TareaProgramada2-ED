@@ -1,18 +1,18 @@
 #include "ArbolClientes.h"
 
-Adiministrador_ArbB::Adiministrador_ArbB() {
+ArbolClientes::ArbolClientes() {
 	this->raiz = NULL;
 }
 
-bool Adiministrador_ArbB::arbol_Vacio() {
+bool ArbolClientes::arbol_Vacio() {
 	return this->raiz == NULL;
 }
 
-puntero_Administrador Adiministrador_ArbB::getRaiz() {
+puntero_Cliente ArbolClientes::getRaiz() {
 	return this->raiz;
 }
 
-void Adiministrador_ArbB::buscar_Dato(int& pCedula, puntero_Administrador& pRaiz, bool& pEsta, int& pIndice_Rama)
+void ArbolClientes::buscar_Dato(int& pCedula, puntero_Cliente& pRaiz, bool& pEsta, int& pIndice_Rama)
 {
 	if (pCedula < pRaiz->getCedula(0)) {
 		pEsta = false;
@@ -26,7 +26,7 @@ void Adiministrador_ArbB::buscar_Dato(int& pCedula, puntero_Administrador& pRaiz
 	}
 }
 
-void Adiministrador_ArbB::meter_Dato(int& pCedulaAux, string& pNombreAux, puntero_Administrador& pPaginaXr, puntero_Administrador& pRaiz, int& pIndice_Rama)
+void ArbolClientes::meter_Dato(int& pCedulaAux, string& pNombreAux, puntero_Cliente& pPaginaXr, puntero_Cliente& pRaiz, int& pIndice_Rama)
 {
 	for (int i = pRaiz->getCuentas(); i >= pIndice_Rama + 1; i--)
 	{
@@ -39,7 +39,7 @@ void Adiministrador_ArbB::meter_Dato(int& pCedulaAux, string& pNombreAux, punter
 	pRaiz->setRama(pIndice_Rama + 1, pPaginaXr);
 }
 
-void Adiministrador_ArbB::empujar_Arriba(int& pCedula, string& pNombre, puntero_Administrador& pRaiz, bool& pEmpujar_Arriba, int& pCedula_Aux, string& pNombre_Aux, puntero_Administrador& pPaginaXr)
+void ArbolClientes::empujar_Arriba(int& pCedula, string& pNombre, puntero_Cliente& pRaiz, bool& pEmpujar_Arriba, int& pCedula_Aux, string& pNombre_Aux, puntero_Cliente& pPaginaXr)
 {
 	int indice_Rama = 0;
 	bool esta = false;
@@ -54,14 +54,14 @@ void Adiministrador_ArbB::empujar_Arriba(int& pCedula, string& pNombre, puntero_
 		this->buscar_Dato(pCedula, pRaiz, esta, indice_Rama);
 		if (esta)
 			return;
-		puntero_Administrador rama = pRaiz->getRama(indice_Rama);
+		puntero_Cliente rama = pRaiz->getRama(indice_Rama);
 		this->empujar_Arriba(pCedula, pNombre, rama, pEmpujar_Arriba, pCedula_Aux, pNombre_Aux, pPaginaXr);
 		pRaiz->setRama(indice_Rama, rama);
 
 		if (pEmpujar_Arriba) {
 			if (pRaiz->getCuentas() < 4) {
 				pEmpujar_Arriba = false;
-				puntero_Administrador paginaAux = pPaginaXr;
+				puntero_Cliente paginaAux = pPaginaXr;
 				this->meter_Dato(pCedula_Aux, pNombre_Aux, paginaAux, pRaiz, indice_Rama);
 				pPaginaXr = paginaAux;
 			}
@@ -69,7 +69,7 @@ void Adiministrador_ArbB::empujar_Arriba(int& pCedula, string& pNombre, puntero_
 				pEmpujar_Arriba = true;
 				int cedulaAuxD = 0;
 				string nombreAuxD = "";
-				puntero_Administrador paginaAux = NULL;
+				puntero_Cliente paginaAux = NULL;
 
 				this->dividir_Pagina(pCedula_Aux, pNombre_Aux, pPaginaXr, pRaiz, indice_Rama, cedulaAuxD, nombreAuxD, paginaAux);
 
@@ -81,33 +81,33 @@ void Adiministrador_ArbB::empujar_Arriba(int& pCedula, string& pNombre, puntero_
 	}
 }
 
-void Adiministrador_ArbB::inserta(int pCedula, string pNombre)
+void ArbolClientes::inserta(int pCedula, string pNombre)
 {
 	bool empujar_Arriba = false;
 	int cedula_Aux = 0;
 	string nombre_Aux = "";
-	puntero_Administrador paginaXr = NULL;
-	puntero_Administrador paginaAux = NULL;
+	puntero_Cliente paginaXr = NULL;
+	puntero_Cliente paginaAux = NULL;
 
 	this->empujar_Arriba(pCedula, pNombre, this->raiz, empujar_Arriba, cedula_Aux, nombre_Aux, paginaXr);
 
 	if (empujar_Arriba) {
-		paginaAux = new Pagina_Administrador(cedula_Aux, nombre_Aux);
+		paginaAux = new Pagina_Cliente(cedula_Aux, nombre_Aux);
 		paginaAux->setRama(0, this->raiz);
 		paginaAux->setRama(1, paginaXr);
 		this->raiz = paginaAux;
 	}
 }
 
-void Adiministrador_ArbB::dividir_Pagina(int& pCedula_Aux, string& pNombre_Aux, puntero_Administrador& pPaginaXr, puntero_Administrador& pRaiz, int& pIndice_Rama, int& pCedula_Aux2, string& pNombre_Aux2, puntero_Administrador& pPaginaXr2)
+void ArbolClientes::dividir_Pagina(int& pCedula_Aux, string& pNombre_Aux, puntero_Cliente& pPaginaXr, puntero_Cliente& pRaiz, int& pIndice_Rama, int& pCedula_Aux2, string& pNombre_Aux2, puntero_Cliente& pPaginaXr2)
 {
 	int posMda = 0;
 	if (pIndice_Rama <= 2)
 		posMda = 2;
 	else
 		posMda = 3;
-	pPaginaXr2 = new Pagina_Administrador();
-	puntero_Administrador rama = NULL;
+	pPaginaXr2 = new Pagina_Cliente();
+	puntero_Cliente rama = NULL;
 
 	for (int i = 0; i < 5; i++) {
 		pPaginaXr2->setRama(i, rama);
@@ -141,7 +141,7 @@ void Adiministrador_ArbB::dividir_Pagina(int& pCedula_Aux, string& pNombre_Aux, 
 	pRaiz->setNombre(i, "");
 }
 
-void Adiministrador_ArbB::imprimir_Arbol()
+void ArbolClientes::imprimir_Arbol()
 {
 	if (this->arbol_Vacio()) {
 		cout << "\n\tArbol vacio.\n";
@@ -151,7 +151,7 @@ void Adiministrador_ArbB::imprimir_Arbol()
 }
 
 
-void Adiministrador_ArbB::quitar(puntero_Administrador& pRaiz, int& pIndice_Rama)
+void ArbolClientes::quitar(puntero_Cliente& pRaiz, int& pIndice_Rama)
 {
 	int cuentas = pRaiz->getCuentas();
 	for (int j = pIndice_Rama; j <= cuentas; j++)
@@ -164,9 +164,9 @@ void Adiministrador_ArbB::quitar(puntero_Administrador& pRaiz, int& pIndice_Rama
 	pRaiz->setNombre(cuentas - 1, "");
 }
 
-void Adiministrador_ArbB::sucesor(puntero_Administrador& pRaiz, int& pIndice_Rama)
+void ArbolClientes::sucesor(puntero_Cliente& pRaiz, int& pIndice_Rama)
 {
-	puntero_Administrador pagina_Q = pRaiz->getRama(pIndice_Rama);
+	puntero_Cliente pagina_Q = pRaiz->getRama(pIndice_Rama);
 	int indice_Cero = 0;
 	while (pagina_Q->getRama(indice_Cero) != NULL)
 		pagina_Q = pagina_Q->getRama(indice_Cero);
@@ -175,7 +175,7 @@ void Adiministrador_ArbB::sucesor(puntero_Administrador& pRaiz, int& pIndice_Ram
 	pRaiz->setNombre(pIndice_Rama - 1, pagina_Q->getNombre(0));
 }
 
-void Adiministrador_ArbB::eliminar_Registro(int& pCedula, puntero_Administrador& pRaiz, bool& pEncontrado)
+void ArbolClientes::eliminar_Registro(int& pCedula, puntero_Cliente& pRaiz, bool& pEncontrado)
 {
 	int indice_Rama = 0;
 	if (pRaiz == NULL)
@@ -192,7 +192,7 @@ void Adiministrador_ArbB::eliminar_Registro(int& pCedula, puntero_Administrador&
 			}
 			else {
 				this->sucesor(pRaiz, indice_Rama);
-				puntero_Administrador rama = pRaiz->getRama(indice_Rama);
+				puntero_Cliente rama = pRaiz->getRama(indice_Rama);
 				int cedula = pRaiz->getCedula(indice);
 
 				this->eliminar_Registro(cedula, rama, pEncontrado);
@@ -203,7 +203,7 @@ void Adiministrador_ArbB::eliminar_Registro(int& pCedula, puntero_Administrador&
 			}
 		}
 		else {
-			puntero_Administrador rama = pRaiz->getRama(indice_Rama);
+			puntero_Cliente rama = pRaiz->getRama(indice_Rama);
 			this->eliminar_Registro(pCedula, rama, pEncontrado);
 			pRaiz->setRama(indice_Rama, rama);
 
@@ -214,10 +214,10 @@ void Adiministrador_ArbB::eliminar_Registro(int& pCedula, puntero_Administrador&
 	}
 }
 
-void Adiministrador_ArbB::eliminar(int pCedula)
+void ArbolClientes::eliminar(int pCedula)
 {
 	bool encontrado = false;
-	puntero_Administrador pagina_P = NULL;
+	puntero_Cliente pagina_P = NULL;
 
 	this->eliminar_Registro(pCedula, this->raiz, encontrado); //EliminarRegistro (C1:valor a borrar,Raiz,Encontrado);
 	if (encontrado == false)
@@ -234,9 +234,9 @@ void Adiministrador_ArbB::eliminar(int pCedula)
 }
 
 
-void Adiministrador_ArbB::mover_Derecha(puntero_Administrador& pRaiz, int& pIndice_Rama)
+void ArbolClientes::mover_Derecha(puntero_Cliente& pRaiz, int& pIndice_Rama)
 {
-	puntero_Administrador rama_Trabajo = pRaiz->getRama(pIndice_Rama);
+	puntero_Cliente rama_Trabajo = pRaiz->getRama(pIndice_Rama);
 	int cuentas = rama_Trabajo->getCuentas();
 	int indice = 0;
 
@@ -265,10 +265,10 @@ void Adiministrador_ArbB::mover_Derecha(puntero_Administrador& pRaiz, int& pIndi
 	rama_Trabajo->setNombre(indice, "");
 }
 
-void Adiministrador_ArbB::mover_Izquierda(puntero_Administrador& pRaiz, int& pIndice_Rama)
+void ArbolClientes::mover_Izquierda(puntero_Cliente& pRaiz, int& pIndice_Rama)
 {
 	int indice = pIndice_Rama - 1;
-	puntero_Administrador rama_Trabajo = pRaiz->getRama(indice);
+	puntero_Cliente rama_Trabajo = pRaiz->getRama(indice);
 
 	int cuentas = rama_Trabajo->getCuentas() + 1;
 
@@ -296,11 +296,11 @@ void Adiministrador_ArbB::mover_Izquierda(puntero_Administrador& pRaiz, int& pIn
 	}
 }
 
-void Adiministrador_ArbB::combinar(puntero_Administrador& pRaiz, int& pIndice_Rama)
+void ArbolClientes::combinar(puntero_Cliente& pRaiz, int& pIndice_Rama)
 {
 	int indice = pIndice_Rama - 1;
-	puntero_Administrador pagina_Q = pRaiz->getRama(pIndice_Rama);
-	puntero_Administrador rama_Trabajo = pRaiz->getRama(indice);
+	puntero_Cliente pagina_Q = pRaiz->getRama(pIndice_Rama);
+	puntero_Cliente rama_Trabajo = pRaiz->getRama(indice);
 
 	int cuentas = rama_Trabajo->getCuentas();
 	rama_Trabajo->setCedula(cuentas, pRaiz->getCedula(pIndice_Rama - 1));
@@ -333,7 +333,7 @@ void Adiministrador_ArbB::combinar(puntero_Administrador& pRaiz, int& pIndice_Ra
 	delete pagina_Q;
 }
 
-void  Adiministrador_ArbB::restablecer(puntero_Administrador& pRaiz, int& pIndice_Rama)
+void  ArbolClientes::restablecer(puntero_Cliente& pRaiz, int& pIndice_Rama)
 {
 	//cout<<"\t-------\n\tIndc: "<<pIndice_Rama<<"\n\t-------";
 	if (pIndice_Rama > 0) {
@@ -356,21 +356,21 @@ void  Adiministrador_ArbB::restablecer(puntero_Administrador& pRaiz, int& pIndic
 	}
 }
 
-puntero_Administrador Adiministrador_ArbB::buscar(int pCedula)
+puntero_Cliente ArbolClientes::buscarCliente(int pCedula)
 {
 	if (this->raiz == NULL)
 		return NULL;
 	return this->raiz->buscar(pCedula);
 }
 
-bool Adiministrador_ArbB::esta_Administrador(int pCedula)
+bool ArbolClientes::esta_cliente(int pCedula)
 {
 	if (this->raiz == NULL)
 		return false;
 	return this->raiz->buscar(pCedula) != NULL;
 }
 
-void Adiministrador_ArbB::agregar_Datos_lectura(string& pDatosLinea)
+void ArbolClientes::agregar_Datos_lectura(string& pDatosLinea)
 {
 	std::string datos[2] = { "", "" };
 	int indiceDatos = 0;
@@ -380,13 +380,13 @@ void Adiministrador_ArbB::agregar_Datos_lectura(string& pDatosLinea)
 		else
 			indiceDatos++;
 	}
-	if (!this->esta_Administrador(stoi(datos[0].c_str())))
+	if (!this->esta_cliente(stoi(datos[0].c_str())))
 		this->inserta(stoi(datos[0].c_str()), datos[1]);
 }
 
-void Adiministrador_ArbB::leer_Doc()
+void ArbolClientes::leerDocCliente()
 {
-	string nombreArchivo = "Administradores.txt";
+	string nombreArchivo = "Clientes.txt";
 	ifstream file(nombreArchivo.c_str());
 	string linea;
 
