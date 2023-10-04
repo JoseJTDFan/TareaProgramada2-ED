@@ -5,6 +5,7 @@
 #include <iostream>
 #include "ArbolPais.h"
 #include "ArbolClientes.h"
+#include "cola.h"
 #include <cstdlib>
 #include <string.h>
 
@@ -80,7 +81,7 @@ class Menu {
 		ArbolPais baseDeDatos;
 		ArbolClientes clientes;
 //		listaClientes clientes; //lista de clientes
-//		cola colaClientes;
+		cola colaClientes;
 };
 
 void Menu::insertarPais(){
@@ -1023,6 +1024,222 @@ void Menu::modificar(){
 	}while(bandera);	
 }
 
+bool Menu::desicion(bool bandera){
+	bool bandera2=true;
+	do{
+		system("cls");
+		cout<<endl<<"Desea seguir comprando?"<<endl;
+		cout<<"1.Si"<<endl;
+		cout<<"2.No"<<endl;
+		cout<<endl<<"-->";
+		int opcion;
+		cin>>opcion;
+		switch (opcion){
+			case 1:
+				bandera2=false;
+				break;
+			case 2:
+				bandera=false;
+				bandera2=false;
+				break;
+			default:
+				cout<<"Ingrese un numero valido"<<endl;
+				system("pause");
+				
+		}
+	}while(bandera2==true);
+	return bandera;
+}
+
+void Menu::comprar(){
+	system("cls");
+	cout<<"****************************** COMPRAR ******************************"<<endl;
+	
+	if(colaClientes.ColaLlena()){
+		cout<<endl<<"La cola esta llena, no puede comprar."<<endl;
+		system("pause");
+		return;
+	}
+	
+	cout<<endl<<"Ingrese su numero de cedula: ";
+	int cedula;
+	cin>>cedula;
+	
+	puntero_Cliente nodoClientes = clientes.buscarCliente(cedula);
+	
+	if(colaClientes.buscar(cedula)==true){
+		cout<<endl<<"El cliente ya esta en la cola."<<endl;
+		system("pause");
+		return;
+	}
+	
+	if (nodoClientes!=NULL){
+		int indice = nodoClientes->getIndice(cedula);
+		pnodoFila clienteNodo = new NodoFila();
+		clienteNodo->cedula = nodoClientes->getCedula(indice);
+		clienteNodo->nombreCliente = nodoClientes->getNombre(indice);
+		bool bandera =true, banderaCompra=false;
+		banderaCompra=false;
+		do{
+			system("cls");
+			cout<<endl<<endl;
+			cout<<baseDeDatos.imprimir_Pais ();
+			cout<<endl<<endl<<"Ingrese el codigo del pais en el que quiere comprar: ";
+			
+			int codPais;
+			cin>>codPais;
+			cout<<endl;
+			
+			pnodoPais nodoPais = baseDeDatos.buscarPais(codPais);
+			if(nodoPais==NULL){
+				cout<<endl<<"Pais Invalido o No Registrado"<<endl;
+				system("pause");
+				bandera = desicion(bandera);
+				continue;
+			}
+			if (nodoPais->getCiudad()==NULL){
+				cout<<endl<<"No hay ciudades registradas."<<endl;
+				system("pause");
+				bandera = desicion(bandera);
+				continue;
+			}
+			system("cls");
+			cout<<baseDeDatos.imprimir_Ciudad (codPais);
+			
+			cout<<endl<<endl<<"Ingrese el codigo de la ciudad en el que quiere comprar: ";
+			int codCiudad;
+			cin>>codCiudad;
+			pnodoCiudad nodoCiudad = baseDeDatos.buscarCiudad(codPais, codCiudad);
+			if(nodoCiudad==NULL){
+				cout<<endl<<"Ciudad Invalida o No Registrada"<<endl;
+				system("pause");
+				bandera = desicion(bandera);
+				continue;
+			}
+			if (nodoCiudad->getRest ()==NULL){
+				cout<<endl<<"No hay restaurantes registrados."<<endl;
+				system("pause");
+				bandera = desicion(bandera);
+				continue;
+			}
+			
+			system("cls");
+			cout<<baseDeDatos.imprimir_Rest ( codPais, codCiudad);
+			
+			cout<<endl<<endl<<"Ingrese el codigo del restaurante en el que quiere comprar: ";
+			int codRest;
+			cin>>codRest;
+			pnodoRest nodoRest = baseDeDatos.buscarRest(codPais, codCiudad,codRest);
+			if(nodoRest==NULL){
+				cout<<endl<<"Restaurante Invalido o No Registrado"<<endl;
+				system("pause");
+				bandera = desicion(bandera);
+				continue;
+			}
+			if (nodoRest->getMenu ()==NULL){
+				cout<<endl<<"No hay menus registrados."<<endl;
+				system("pause");
+				bandera = desicion(bandera);
+				continue;
+			}
+			do{
+				
+				system("cls");
+				cout<<baseDeDatos.imprimir_Menu ( codPais, codCiudad, codRest);
+				
+				cout<<endl<<endl<<"Ingrese el codigo del menu en el que quiere comprar: ";
+				int codMenu;
+				cin>>codMenu;
+				pnodoMenu nodoMenu = baseDeDatos.buscarMenu(codPais, codCiudad,codRest,codMenu);
+				if(nodoMenu==NULL){
+					cout<<endl<<"Menu Invalido o No Registrado"<<endl;
+					system("pause");
+					bandera = desicion(bandera);
+					continue;
+				}
+				if (nodoMenu->getdirProducto()==NULL){
+					cout<<endl<<"No hay productos registrados."<<endl;
+					system("pause");
+					bandera = desicion(bandera);
+					continue;
+				}
+				
+				
+				system("cls");
+				baseDeDatos.imprimir_Producto (codPais,codCiudad, codRest, codMenu);
+				cout<<endl<<endl<<"Ingrese el codigo del producto a comprar: ";
+				int codProd;
+				cin>>codProd;
+				
+				
+				pnodoProducto nodoProd = baseDeDatos.buscarProducto(codPais,codCiudad,codRest,codMenu,codProd);
+				if (nodoProd!=NULL){
+					int cantidad;
+	
+					cout<<endl<<"¿Cuantas unidades desea comprar de "<<nodoProd->getNombre ()<<"?: ";
+					cin>>cantidad;
+					if (cantidad<=nodoProd->getcantidad()){
+						nodoProd->setcantidad(nodoProd->getcantidad()-cantidad);
+						clienteNodo->productos.InsertarFinal(codPais,codCiudad,codRest,codMenu,codProd,nodoProd->getNombre(),cantidad);
+						system("cls");
+						clienteNodo->productos.MostrarCompra();
+						cout<<endl<<"Se ha insertado el producto a su carrito."<<endl;
+						banderaCompra=true;
+					}
+					else{
+						cout<<endl<<"Cantidad ingresada superior a la almacenada."<<endl;
+					}
+					system("pause");
+					bandera = desicion(bandera);
+					continue;
+				}
+				else{
+					cout<<endl<<"Este codigo no se encuentra registrado."<<endl;
+					system("pause");
+					bandera = desicion(bandera);
+					continue;
+				}
+			}while(bandera==true && banderaCompra==true);	
+		}while(bandera==true);
+		system("cls");
+		if(banderaCompra==true){
+			bool bandera2=true;
+			do{
+				system("cls");
+				cout<<endl<<"Llevar o comer en el restaurante?"<<endl;
+				cout<<"1.Llevar."<<endl;
+				cout<<"2.Comer en el restaurante."<<endl;
+				cout<<endl<<"-->";
+				int opcion;
+				cin>>opcion;
+				switch (opcion){
+					case 1:
+						clienteNodo->lugar = 1;
+						bandera2=false;
+						break;
+					case 2:
+						clienteNodo->lugar = 2;
+						bandera2=false;
+						break;
+					default:
+						cout<<"Ingrese un numero valido"<<endl;
+						system("pause");		
+				}
+			}while(bandera2==true);
+			system("cls");
+			colaClientes.insertar(clienteNodo);
+		colaClientes.imprimir();
+		system("pause");
+		}
+		delete clienteNodo;
+		
+	}
+	else{
+		cout<<endl<<"Este cliente no se encuentra registrado."<<endl;
+		system("pause");
+	}
+}
+
 void Menu::menu(){
 	bool bandera=true;
 	do{
@@ -1039,8 +1256,8 @@ void Menu::menu(){
 		cout<<"2. Buscar."<<endl;
 		cout<<"3. Modificar"<<endl;
 //		cout<<"4. Reportar"<<endl;
-//		cout<<"5. Registrar Comprar"<<endl;
-		cout<<"4. Salir"<<endl;
+		cout<<"4. Registrar Compra"<<endl;
+		cout<<"5. Salir"<<endl;
 		cout<<endl<<"----> ";
 		int opcion;
 		cin>>opcion;
@@ -1056,11 +1273,12 @@ void Menu::menu(){
 		case 3:
 			modificar();
 			break;
-//		case 4:
-//			break;
+		case 4:
+			comprar();
+			break;
 //		case 5:
 //			break;
-		case 4:
+		case 5:
 			bandera=false;
 			break;
 		default:

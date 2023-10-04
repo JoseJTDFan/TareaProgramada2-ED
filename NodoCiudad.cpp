@@ -315,7 +315,7 @@ string NodoCiudad::inOrden_Ciudad()
 	string reporte = "";
 	if (this->getHIzq() != NULL)
 		reporte += this->getHIzq()->inOrden_Ciudad();
-	reporte += "\n\tCodPais: "+to_Stiringeo(this->codPais)+" - CodCiudad: "+to_Stiringeo(this->codCiudad)+" - Nombre: "+this->nombre;
+	reporte += "\n\tCodCiudad: "+to_Stiringeo(this->codCiudad)+" - Nombre: "+this->nombre;
 	if (this->getHDer()!= NULL)
 		reporte += this->getHDer()->inOrden_Ciudad();
 	return reporte;

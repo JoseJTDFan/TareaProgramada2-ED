@@ -118,7 +118,7 @@ string NodoPais::inOrden_Pais()
 	string reporte = "";
 	if (this->getHIzq() != NULL)
 		reporte += this->getHIzq()->inOrden_Pais();
-	reporte += "\n\tCodigo: "+to_Stiringeo(this->codPais)+" - Nombre: "+this->nombre;
+	reporte += "\n\tCodPais: "+to_Stiringeo(this->codPais)+" - Nombre: "+this->nombre;
 	if (this->getHDer()!= NULL)
 		reporte += this->getHDer()->inOrden_Pais();
 	return reporte;
@@ -131,7 +131,7 @@ void NodoPais::imprimir_Arbol()
 		this->getHIzq()->imprimir_Arbol();
 
 	cout<< "\n\n\t--------\n\tPais:  \n";
-	cout<< "\n\nCodigo: "+to_string(this->codPais) +" - Nombre: "+this->nombre;
+	cout<< "\n\nCodPais: "+to_string(this->codPais) +" - Nombre: "+this->nombre;
 	cout<< "\n\t--------";
 	if (this->dirCiudad != NULL)
 		this->dirCiudad->imprimir_Arbol();
