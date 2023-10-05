@@ -66,12 +66,21 @@ class Menu {
 		void modificarCompra();
 		
 		//Reportes
-		void reportarPais();
-		void reportarCiudad();
-		void reportarRest();
-		void reportarCliente();
-		void reportarRestMasBuscado();
-		void reportarPrecio();
+//		void reportarPais();
+//		void reportarCiudad();
+//		void reportarRest();
+//		void reportarCliente();
+//		void reportarComprasCliente();
+//		void reportarRestMasBuscado();
+//		void reportarMenu();
+//		void reportarProductos();
+//		void reportarMenuMasBuscado();
+//		void reportarProductoMasComprado();
+//		void reportarFacturaMayor();
+//		void reportarFacturaMenor();
+//		void reportarPrecio();
+//		void reportarDescuento();
+//		void reportarCantidadProducto();
 		
 		//Extra
 		bool desicion(bool bandera);
@@ -1480,6 +1489,89 @@ void Menu::comprar(){
 	}
 }
 
+void Menu::reportes(){
+	bool bandera=true;
+	do{
+		system("cls");
+		cout<<"****************************** REPORTAR ******************************"<<endl;
+		cout<<endl<<"Ingrese que desea reportar"<<endl<<endl;
+		cout<<"1.  Arbol de todos los paises."<<endl;
+		cout<<"2.  Ciudades de un pais."<<endl;
+		cout<<"3.  Restaurantes de un pais y ciudad especifica."<<endl;
+		cout<<"4.  Arbol de clientes."<<endl;
+		cout<<"5.  Compras de un cliente. "<<endl;
+		cout<<"6.  Restaurante mas buscado."<<endl;
+		cout<<"7.  Menu de un restaurante. "<<endl;
+		cout<<"8.  Productos de un menu. "<<endl;
+		cout<<"9.  Menu mas buscado."<<endl;
+		cout<<"10. Producto mas comprado."<<endl;
+		cout<<"11. Factura de mayor monto. "<<endl;
+		cout<<"12. Factura de menor monto. "<<endl;
+		cout<<"13. Consultar el precio de un producto."<<endl;
+		cout<<"14. Consultar el descuento aplicado por pago con tarjeta. "<<endl;
+		cout<<"15. Consultar la cantidad de un producto. "<<endl;
+		cout<<"16. Salir."<<endl;
+		cout<<endl<<"----> ";
+		int opcion;
+		cin>>opcion;
+		cout<<endl;
+		switch (opcion){
+//			case 1:
+//				reportarPais();
+//				break;
+//			case 2:
+//				reportarCiudad();
+//				break;
+//			case 3:
+//				reportarRest();
+//				break;
+//			case 4:
+//				reportarCliente();
+//				break;
+//			case 5:
+//				reportarComprasCliente();
+//				break;
+//			case 6:
+//				reportarRestMasBuscado();
+//				break;
+//			case 7:
+//				reportarMenu();
+//				break;
+//			case 8:
+//				reportarProductos();
+//				break;
+//			case 9:
+//				reportarMenuMasBuscado();
+//				break;
+//			case 10:
+//				reportarProductoMasComprado();
+//				break;
+//			case 11:
+//				reportarFacturaMayor();
+//				break;
+//			case 12:
+//				reportarFacturaMenor();
+//				break;
+//			case 13:
+//				reportarPrecio();
+//				break;
+//			case 14:
+//				reportarDescuento();
+//				break;
+//			case 15:
+//				reportarCantidadProducto();
+//				break;
+			case 16:
+				bandera=false;
+				break;	
+			default:
+				cout<<"Ingrese un numero valido"<<endl;
+				system("pause");
+				break;
+			}
+	}while(bandera);	
+}
+
 void Menu::menu(){
 	bool bandera=true;
 	do{
@@ -1495,9 +1587,9 @@ void Menu::menu(){
 		cout<<"1. Insertar."<<endl;
 		cout<<"2. Buscar."<<endl;
 		cout<<"3. Modificar"<<endl;
-//		cout<<"4. Reportar"<<endl;
-		cout<<"4. Registrar Compra"<<endl;
-		cout<<"5. Salir"<<endl;
+		cout<<"4. Reportar"<<endl;
+		cout<<"5. Registrar Compra"<<endl;
+		cout<<"6. Salir"<<endl;
 		cout<<endl<<"----> ";
 		int opcion;
 		cin>>opcion;
@@ -1514,11 +1606,12 @@ void Menu::menu(){
 			modificar();
 			break;
 		case 4:
+			reportes();
+			break;
+		case 5:
 			comprar();
 			break;
-//		case 5:
-//			break;
-		case 5:
+		case 6:
 			bandera=false;
 			break;
 		default:
