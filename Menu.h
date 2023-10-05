@@ -972,6 +972,34 @@ void Menu::modificarRest(){
 	
 }
 
+void Menu::modificarCliente(){
+	
+	system("cls");
+	cout<<"****************************** MODIFICAR CLIENTE ******************************"<<endl;
+	clientes.imprimir_Arbol();
+	cout<<endl<<"Ingrese la cedula del cliente a modificar: ";
+	int cedula;
+	cin>>cedula;
+	puntero_Cliente Pagina_Cliente = clientes.buscarCliente(cedula);
+	int indice = Pagina_Cliente->getIndice(cedula);
+	if (Pagina_Cliente!=NULL){
+		system("cls");
+		cout<<endl<<"Ingrese el nuevo nombre del cliente: ";
+		string nombre;
+		cin.ignore();
+		getline(cin,nombre);
+		Pagina_Cliente->setNombre(indice,nombre);
+		system("cls");
+		clientes.imprimir_Arbol();
+		cout<<endl<<endl<<"Se ha modificado el cliente."<<endl;
+		system("pause");
+	}
+	else{
+		cout<<endl<<"Este codigo no se encuentra registrado."<<endl;
+		system("pause");
+	}
+}
+
 void Menu::modificar(){
 	bool bandera=true;
 	do{
@@ -983,7 +1011,7 @@ void Menu::modificar(){
 		cout<<"3. Un restaurante."<<endl;
 //		cout<<"4. Un menu."<<endl;
 //		cout<<"5. Un producto."<<endl;
-//		cout<<"6. Un cliente."<<endl;
+		cout<<"6. Un cliente."<<endl;
 //		cout<<"7. Una compra"<<endl;
 		cout<<"4. Salir."<<endl;
 		cout<<endl<<"----> ";
@@ -1007,9 +1035,9 @@ void Menu::modificar(){
 //			case 5:
 //				modificarProducto();
 //				break;
-//			case 6:
-//				modificarCliente();
-//				break;
+			case 6:
+				modificarCliente();
+				break;
 //			case 7:
 //				modificarCompra();
 				break;
