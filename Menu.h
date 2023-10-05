@@ -976,6 +976,75 @@ void Menu::modificarMenu(){;
 	system("cls");
 	cout<<"****************************** MODIFICAR MENU ******************************"<<endl<<endl;
 	cout<<baseDeDatos.imprimir_Pais ();
+	cout<<endl<<endl<<"Ingrese el codigo del pais que quiere modificar un menu: ";
+	int codPais;
+	cin>>codPais;
+	cout<<endl;
+	
+	pnodoPais nodoPais = baseDeDatos.buscarPais(codPais);
+	if(nodoPais==NULL){
+		cout<<endl<<"Pais Invalido o No Registrado"<<endl;
+		system("pause");
+		return;
+	}
+	if (nodoPais->getCiudad ()==NULL){
+		cout<<endl<<"No hay ciudades registradas."<<endl;
+		system("pause");
+		return;
+	}
+	system("cls");
+	cout<<baseDeDatos.imprimir_Ciudad (codPais);
+	cout<<endl<<endl<<"Ingrese el codigo de la ciudad que quiere modificar un menu: ";
+	int codCiudad;
+	cin>>codCiudad;
+	pnodoCiudad nodoCiudad = baseDeDatos.buscarCiudad(codPais, codCiudad);
+	if(nodoCiudad==NULL){
+		cout<<endl<<"Ciudad Invalida o No Registrada"<<endl;
+		system("pause");
+		return;
+	}
+	system("cls");
+	cout<<baseDeDatos.imprimir_Rest (codPais,codCiudad);
+	cout<<endl<<endl<<"Ingrese el codigo del restaurante que quiere modificar un menu: ";
+	int codRest;
+	cin>>codRest;
+	pnodoRest nodoRest = nodoCiudad->getRest()->buscarRest(codRest);
+	if(nodoRest==NULL){
+		cout<<endl<<"Restaurante Invalido o No Registrado"<<endl;
+		system("pause");
+		return;
+	}
+
+	system("cls");
+	cout<<baseDeDatos.imprimir_Menu(codPais, codCiudad, codRest);
+	cout<<endl<<endl<<"Ingrese el codigo del menu a modificar: ";
+	int codMenu;
+	cin>>codMenu;
+	pnodoMenu nodoMenu = nodoRest->getMenu()->buscarMenu(codMenu);
+	if (nodoMenu!=NULL){
+		system("cls");
+		string nombre;
+		cout<<endl<<"Ingrese el nuevo nombre del menu: ";
+		cin.ignore();
+		getline(cin,nombre);
+		nodoMenu->setNombre (nombre);
+		system("cls");
+		cout<<baseDeDatos.imprimir_Menu(codPais,codCiudad,codRest);
+		cout<<endl<<endl<<"Se ha modificado el menu"<<endl;
+		system("pause");
+	}
+	else{
+		cout<<endl<<"Este codigo no se encuentra registrado."<<endl;
+		system("pause");
+		return;
+	}
+	
+}
+
+void Menu::modificarProducto(){;
+	system("cls");
+	cout<<"****************************** MODIFICAR PRODUCTO ******************************"<<endl<<endl;
+	cout<<baseDeDatos.imprimir_Pais ();
 	cout<<endl<<endl<<"Ingrese el codigo del pais que quiere modificar un producto: ";
 	int codPais;
 	cin>>codPais;
@@ -1014,31 +1083,105 @@ void Menu::modificarMenu(){;
 		system("pause");
 		return;
 	}
-
 	system("cls");
 	cout<<baseDeDatos.imprimir_Menu(codPais, codCiudad, codRest);
-	cout<<endl<<endl<<"Ingrese el codigo del menu a modificar: ";
+	cout<<endl<<endl<<"Ingrese el codigo del menu que quiere modificar un producto: ";
 	int codMenu;
 	cin>>codMenu;
 	pnodoMenu nodoMenu = nodoRest->getMenu()->buscarMenu(codMenu);
-	if (nodoMenu!=NULL){
-		system("cls");
-		string nombre;
-		cout<<endl<<"Ingrese el nuevo nombre del menu: ";
-		cin.ignore();
-		getline(cin,nombre);
-		nodoMenu->setNombre (nombre);
-		system("cls");
-		cout<<baseDeDatos.imprimir_Menu(codPais,codCiudad,codRest);
-		cout<<endl<<endl<<"Se ha modificado el menu"<<endl;
+	if (nodoMenu==NULL){
+		cout<<endl<<"Menu Invalido o No Registrado"<<endl;
 		system("pause");
+		return;
+	}
+	system("cls");
+	baseDeDatos.imprimir_Producto(codPais,codCiudad,codRest,codMenu);
+	cout<<endl<<endl<<"Ingrese el codigo del producto a modificar: ";
+	int codProducto;
+	cin>>codProducto;
+	pnodoProducto nodoProducto = nodoMenu->getdirProducto()->buscarProducto(codProducto);
+	if(nodoProducto!=NULL){
+		system("cls");
+		bool bandera=true;
+		do{
+		system("cls");
+		cout<<"****************************** MODIFICAR PRODUCTO ******************************"<<endl;
+		cout<<endl<<"Ingrese el numero de la opcion que desea modificar"<<endl<<endl;
+		cout<<"1. El nombre."<<endl;
+		cout<<"2. Las calorias."<<endl;
+		cout<<"3. El precio."<<endl;
+		cout<<"4. Insertar mas cantidad. "<<endl;
+		cout<<"5. Salir."<<endl;
+		cout<<endl<<"----> ";
+		int opcion;
+		cin>>opcion;
+		cout<<endl;
+		switch (opcion){
+			case 1:{
+				system("cls");
+				string nombreNuevo;
+				cout<<endl<<"Ingrese el nuevo nombre del producto: ";
+				cin.ignore();
+				getline(cin,nombreNuevo);
+				nodoProducto->setnombre(nombreNuevo);
+				system("cls");
+				baseDeDatos.imprimir_Producto(codPais,codCiudad,codRest,codMenu);
+				cout<<endl<<"Se ha modificado el nombre del producto."<<endl;
+				system("pause");
+				break;
+			}
+			case 2:{
+				system("cls");
+				int kcalNuevo;
+				cout<<endl<<"Ingrese las nuevas calorias del producto: ";
+				cin>>kcalNuevo;
+				nodoProducto->setkcal(kcalNuevo);
+				system("cls");
+				baseDeDatos.imprimir_Producto(codPais,codCiudad,codRest,codMenu);
+				cout<<endl<<"Se han modificado las calorias del producto."<<endl;
+				system("pause");
+				break;
+			}
+			case 3:{
+				system("cls");
+				int precioNuevo;
+				cout<<endl<<"Ingrese el nuevo precio del producto: ";
+				cin>>precioNuevo;
+				nodoProducto->setprecio(precioNuevo);
+				system("cls");
+				baseDeDatos.imprimir_Producto(codPais,codCiudad,codRest,codMenu);
+				cout<<endl<<"Se ha modificado el precio del producto."<<endl;
+				system("pause");
+				break;
+			}
+			case 4:{
+				system("cls");
+				int cantidad = nodoProducto->getcantidad();
+				int cantidadExtra;
+				cout<<endl<<"Ingrese la cantidad que se va a insertar: ";
+				cin>>cantidadExtra;
+				nodoProducto->setcantidad(cantidad+cantidadExtra);
+				system("cls");
+				baseDeDatos.imprimir_Producto(codPais,codCiudad,codRest,codMenu);
+				cout<<endl<<"Se ha insertado mas cantidad del producto."<<endl;
+				system("pause");
+				break;
+			}
+			case 5:
+				bandera=false;
+				break;
+			default:
+				cout<<"Ingrese un numero valido"<<endl;
+				system("pause");
+				break;
+			}
+		}while(bandera);
 	}
 	else{
 		cout<<endl<<"Este codigo no se encuentra registrado."<<endl;
 		system("pause");
 		return;
-	}
-	
+	}	
 }
 
 void Menu::modificarCliente(){
@@ -1079,10 +1222,10 @@ void Menu::modificar(){
 		cout<<"2. Una ciudad."<<endl;
 		cout<<"3. Un restaurante."<<endl;
 		cout<<"4. Un menu."<<endl;
-//		cout<<"5. Un producto."<<endl;
+		cout<<"5. Un producto."<<endl;
 		cout<<"6. Un cliente."<<endl;
 //		cout<<"7. Una compra"<<endl;
-		cout<<"4. Salir."<<endl;
+		cout<<"8. Salir."<<endl;
 		cout<<endl<<"----> ";
 		int opcion;
 	
@@ -1101,16 +1244,16 @@ void Menu::modificar(){
 			case 4:
 				modificarMenu();
 				break;
-//			case 5:
-//				modificarProducto();
-//				break;
+			case 5:
+				modificarProducto();
+				break;
 			case 6:
 				modificarCliente();
 				break;
 //			case 7:
 //				modificarCompra();
 				break;
-			case 7:
+			case 8:
 				bandera=false;
 				break;
 			default:
