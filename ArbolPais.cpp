@@ -75,6 +75,11 @@ void ArbolPais::leeDocPais ()
 	file.close();
 }
 
+string ArbolPais::reportePais(){
+	pnodoPais nodo = this->raiz;
+	return nodo->preOrden_Pais();
+}
+
 //--------------------- Ciudades ---------------------
 
 void ArbolPais::insertCiudad (int codPais, int codCiudad, string nombre)
@@ -170,7 +175,10 @@ void ArbolPais::leerDocCiudad ()
 	file.close();
 }
 
-
+string ArbolPais::reporteCiudad(pnodoPais pais){
+	pnodoCiudad nodo = pais->getCiudad();
+	return nodo->preOrden_Ciudad();
+}
 //--------------------- Rests---------------------
 
 void ArbolPais::insertRest (int codPais, int codCiudad, int codRest, string nombre)
@@ -267,6 +275,10 @@ void ArbolPais::leeDocRest ()
 	file.close();
 }
 
+string ArbolPais::reporteRest(pnodoCiudad ciudad){
+	pnodoRest nodo = ciudad->getRest();
+	return nodo->preOrden_Rest();
+}
 //--------------------- Menus ---------------------
 
 void ArbolPais::insertMenu (int codPais, int codCiudad, int codRest, int codMenu, string nombre)
@@ -360,6 +372,11 @@ void ArbolPais::leeDocMenu ()
     	this->agregar_Datos_Menu(linea);
 	}
 	file.close();
+}
+
+string ArbolPais::reporteMenu(pnodoRest restaurante){
+	pnodoMenu nodo = restaurante->getMenu();
+	return nodo->preOrden_Menu();
 }
 
 //--------------------- Productos ---------------------
@@ -470,3 +487,14 @@ void ArbolPais::imprimir_Arbol_Ventas()
 	}
 	return this->raiz->imprimir_Arbol();
 }
+
+string ArbolPais::reporteProducto(pnodoMenu menu){
+	pnodoProducto nodo = menu->getdirProducto();
+	return nodo->preOrdenProducto();
+}
+
+//string ArbolPais::reportePrecio(pnodoProducto producto){
+//	string reporte = "";
+//	reporte += "Precio del producto: " + to_string(producto->getprecio());
+//	return reporte;
+//}

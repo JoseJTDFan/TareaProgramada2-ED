@@ -27,6 +27,7 @@ class NodoMenu { //AA
 		bool verificarMenu (bool i, int codMenu);
 		
 		string inOrden_Menu ();
+		string preOrden_Menu();
 		void imprimir_Arbol();
 		
 		//getters.

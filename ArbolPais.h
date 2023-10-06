@@ -21,6 +21,7 @@ class ArbolPais{
 		string imprimir_Pais ();
 		void agregar_Datos_Pais (string & pDatosLinea);
 		void leeDocPais ();
+		string reportePais();
 		
 //		--------------------- Ciudad ---------------------
 		void insertCiudad (int codPais, int codCiudad, string nombre);
@@ -30,7 +31,8 @@ class ArbolPais{
 		string imprimir_Ciudad (int codPais);
 		void agregar_Datos_Ciudad (string & pDatosLinea);
 		void leerDocCiudad ();
-
+		string reporteCiudad(pnodoPais pais);
+	
 //		--------------------- Restaurante---------------------
 		void insertRest (int codPais, int codCiudad, int codRest, string nombre);
 		void borrar_Rest (int codPais, int codCiudad, int codRest);
@@ -39,6 +41,7 @@ class ArbolPais{
 		string imprimir_Rest (int codPais, int codCiudad);
 		void agregar_Datos_Rest (string & pDatosLinea);
 		void leeDocRest ();
+		string reporteRest(pnodoCiudad ciudad);
 		
 	//		--------------------- Menu---------------------
 		void insertMenu (int codPais, int codCiudad, int codRest, int codMenu, string nombre);
@@ -48,6 +51,7 @@ class ArbolPais{
 		string imprimir_Menu (int codPais, int codCiudad, int codRest);
 		void agregar_Datos_Menu (string & pDatosLinea);
 		void leeDocMenu ();
+		string reporteMenu(pnodoRest restaurante);
 		
 	//		--------------------- Producto ---------------------
 		void insertProducto (int codPais, int codCiudad, int codRest, int codMenu, int codProducto, string nombre, int kcal, int precio, int cantidad);
@@ -57,6 +61,8 @@ class ArbolPais{
 		void imprimir_Producto (int codPais, int codCiudad, int codRest, int codMenu);
 		void agregar_Datos_Producto (string & pDatosLinea);
 		void leeDocProducto ();
+		string reporteProducto(pnodoMenu menu);
+		string reportePrecio(pnodoProducto producto);
 		
 		void imprimir_Arbol_Ventas ();
 	

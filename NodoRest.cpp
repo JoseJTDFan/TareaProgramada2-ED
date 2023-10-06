@@ -464,6 +464,16 @@ string NodoRest::inOrden_Rest ()
 	return reporte;
 }
 
+string NodoRest::preOrden_Rest (){
+	string reporte = "";
+	reporte += "\n\tCodRestaurante: "+to_Stiringeo(this->codRest)+" - Nombre: "+this->nombre;
+	if (this->getHIzq() != NULL)
+		reporte += this->getHIzq()->preOrden_Rest();
+	if (this->getHDer()!= NULL)
+		reporte += this->getHDer()->preOrden_Rest();
+	return reporte;
+}
+
 void NodoRest::imprimir_Arbol()
 {
 //	string reporte = "";

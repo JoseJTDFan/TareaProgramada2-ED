@@ -39,6 +39,7 @@ class NodoProducto { //AVL
 		void setcantidad (int pcantidad);
 		
 		void inOrdenProducto();
+		string preOrdenProducto();
 		void imprimir_Arbol ();
 		
 		int getFB();

@@ -476,6 +476,17 @@ string NodoMenu::inOrden_Menu()
 	return reporte;
 }
 
+string NodoMenu::preOrden_Menu() 
+{
+	string reporte = "";
+	reporte += "\n\tCodMenu: "+to_string(this->codMenu)+" - Nombre: "+this->nombre;
+	if (this->getHIzq() != NULL)
+		reporte += this->getHIzq()->preOrden_Menu();
+	if (this->getHDer()!= NULL)
+		reporte += this->getHDer()->preOrden_Menu();
+	return reporte;
+}
+
 bool NodoMenu::verificarMenu (bool i, int codMenu) 
 {
 	if(this==NULL){

@@ -124,6 +124,16 @@ string NodoPais::inOrden_Pais()
 	return reporte;
 }
 
+string NodoPais::preOrden_Pais(){
+	string reporte = "";
+	reporte += "\n\tCodPais: "+to_Stiringeo(this->codPais)+" - Nombre: "+this->nombre;
+	if (this->getHIzq() != NULL)
+		reporte	+= this->getHIzq()->preOrden_Pais();
+	if (this->getHDer() != NULL)
+		reporte += this ->getHDer()->preOrden_Pais();
+	return reporte;
+}
+
 void NodoPais::imprimir_Arbol()
 {
 //	string reporte = "";

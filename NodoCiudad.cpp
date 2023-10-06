@@ -321,6 +321,16 @@ string NodoCiudad::inOrden_Ciudad()
 	return reporte;
 }
 
+string NodoCiudad::preOrden_Ciudad(){
+	string reporte = "";
+	reporte += "\n\tCodCiudad: "+to_Stiringeo(this->codCiudad)+" - Nombre: "+this->nombre;
+	if (this->getHIzq() != NULL)
+		reporte += this->getHIzq()->preOrden_Ciudad();
+	if (this->getHDer()!= NULL)
+		reporte += this->getHDer()->preOrden_Ciudad();
+	return reporte;
+}
+
 void NodoCiudad::imprimir_Arbol()
 {	
 //	string reporte = "";

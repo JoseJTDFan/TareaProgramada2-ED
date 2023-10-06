@@ -336,6 +336,27 @@ void NodoProducto::inOrdenProducto()
 	return ;
 }
 
+string NodoProducto::preOrdenProducto()
+{
+	string reporte = "";
+	reporte += "\n\tCodProducto: "+to_string(this->codProducto);
+	reporte += " - Nombre: ";
+	reporte += this->nombre;
+	reporte += " - Calorias: ";
+	reporte += to_string(this->kcal);
+	reporte += " - Precio: ";
+	reporte += to_string(this->precio);
+	reporte += " - Cantidad: ";
+	reporte += to_string(this->cantidad) + "\n";
+	
+	if (this->getHIzq() != NULL)
+		reporte += this->getHIzq()->preOrdenProducto();
+
+	if (this->getHDer()!= NULL)
+		reporte += this->getHDer()->preOrdenProducto();
+	return reporte;
+}
+
 void NodoProducto::imprimir_Arbol()
 {	
 //	string reporte = "";
